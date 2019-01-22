@@ -1,0 +1,9 @@
+{
+    "className": "Biology",
+    "assignment": "quiz",
+    "grade": 92,
+    "weight": 10,
+    "desiredGrade": 80,
+    "finalGrade":90,
+    "semester": "Fall, 2018"  
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="./css/main.css" />
+    <script src="main.js"></script>
+</head>
+<body>
+
+<nav role="navigation">
+    <ul>
+        <li><img class="logo" src="logo.png" alt=""></li>
+        <li class="nav-title">Calculate Store Grades</li>
+    </ul>
+</nav>
+
+    <header role="banner">
+        <section role="region" class="background-text">
+            <h1>Calculate and Store Grades</h1>
+            <h3> Semester to Semester</h3>
+            <button class='auth-buttons'>Login</button>
+            <button class='auth-buttons'>Sign Up</button>
+        </section>
+    </header>
+
+    <main role="main">
+        <h1 class="grade-calculator">Grade Calculator</h1>
+        <form class="calculator" action="/post">
+            <fieldset>
+                <input placeholder="Class Name" type="text" name="class-name" id="class-name">
+                <ul class="calc-header">
+                    <li>Assignment</li>
+                    <li>Grade %</li>
+                    <li>Weight %</li>
+                </ul>
+                <ul class="calc-input">
+                    <li><input type="text" name="assignment" id="assignment"></li>
+                    <li><input type="number" name="grade-percent" id="grade-percent"></li>
+                    <li><input type="number" name="weight-percent" id="weight-percent"></li>
+                </ul>
+                <p class="add-assignment">+ Add Assignment</p>
+                <label class="optional" for="final Grade">Optional: What do I need to make on the finals to make a <input class="final" type="number"> in
+                    the class.</label>
+                <p></p>
+                <button class="calculate-grade" type="submit">Calculate Grade</button>
+            </fieldset>
+        </form>
+    
+        <section role="region" class="display-grade">
+    
+        </section>
+    </main>
+
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>
+</body>
+</html>
