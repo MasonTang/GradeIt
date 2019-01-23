@@ -8,10 +8,9 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 
-const {DATABASE_URL, PORT, Test_DATABASE_URL} = require('./config/database.js')
-console.log(PORT)
-console.log(DATABASE_URL)
-console.log(mongoose.connect(DATABASE_URL)); //connects to our database
+const {DATABASE_URL, PORT, Test_DATABASE_URL} = require('./config/database.js');
+const Grade = require('./app/models/grade');
+const User = require('./app/models/user');
 
 require('./config/passport')(passport); // pass passport for configuration
 
@@ -21,6 +20,7 @@ app.use(bodyParser.json()); //get information from html forms
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+app.use(express.static('public'))
 
 app.set('view engine', 'ejs'); //set up ejs for templating 
 

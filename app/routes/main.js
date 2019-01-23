@@ -1,7 +1,6 @@
-const User = require('../models/user');
-
 module.exports = function (app, passport) {
     const mongoose = require('mongoose');
+    const User = require('../models/user');
     const Grade = require('../models/grade')
     const bodyParser = require('body-parser');
 
@@ -9,6 +8,111 @@ module.exports = function (app, passport) {
     app.use(bodyParser.urlencoded({
         extended: true
     }));
+
+    app.set('view engine', 'ejs')
+////////////////////////////////////////////////
+//TESTING ROUTES
+///////////////////////////////////////////////
+    app.get('/', (req, res) => {
+        res.render('index')
+    });
+
+    //show the login form
+    app.get('/login', (req, res) => {
+        res.render('login')
+    });
+
+    //show the signup form
+    app.get('/signup', (req, res) => {
+        res.render('signup')
+    });
+
+    app.get('/profile', isLoggedIn, (req, res) => {
+        res.status(200).json({ message: 'Profile Page', user:req.user })
+    });
+
+///////////////////////////////////////////////////////////////
+//TESTING ROUTES IN DB FOR GRADE
+/////////////////////////////////////
+    app.get('/grades', (req, res) => {
+        Grade
+            .find()
+            .then(result => res.send(result))
+            .catch(errorHandler);
+    });
+
+    app.post('/grades', (req,res) => {
+        const requiredFields = ['className', 'assignment', 'grades', 'weight', 'semester']
+        for (let i = 0; i < requiredFields.length; i++) {
+            const field = requiredFields[i];
+            if (!(field in req.body)) {
+                const message = `Missing \`${field}\` in request body`;
+                console.error(message);
+                return res.status(400).send(message);
+            }
+        }
+        Grade   
+            .create(req.body)
+            .then(gradepost => res.status(201).json(gradepost.serialize()))
+            .catch(err => {
+                console.error(err);
+                res.status(500).json({ error: 'Something went wrong' });
+            });
+    })
+
+    /////////////////////////
+    //TESTING FOR USERS
+    ////////////////////////////////////////
+    app.get('/users', (req, res) => {
+        User
+            .find()
+            .then(result => res.send(result))
+            .catch(errorHandler)
+    });
+
+};
+
+//route middleware to make sure a user is logged in
+function isLoggedIn(req, res, next) {
+
+    //if user is authenticated in the session, carry on
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    //if they aren't redirect them to the home page
+    else {
+        res.redirect('/')
+    }
+}
+
+//route middleware to make sure a user is logged in as an admin
+function isAdmin(req, res, next) {
+
+    //if user is authenticated in the session, carry on
+    if (req.isAuthenticated() && req.user.level == 'admin') {
+        return next();
+    }
+    //if they aren't redirect them to the home page
+    else {
+        res.redirect('/')
+    }
+}
+
+function errorHandler(err){
+    console.error(err);
+}
+
+/*
+className: gradepost.className,
+    assignment: gradepost.assignment,
+        grade: gradepost.grade,
+            weight: gradepost.weight,
+                semester: gradepost.semester,
+                    desiredGrade: gradepost.desiredGrade,
+                        finalGrade: gradepost.finalGrade
+*/
+
+
 /*
     // ==================================================
     //HOME PAGE (with login links) ==============================
@@ -80,98 +184,5 @@ module.exports = function (app, passport) {
     // =========================================================
     // My SECTION =================================================
     // ===================================================
-    
+
     //home page
-    app.get('/', (req, res) => {
-        res.status(200).json({message:'Home Page'})
-    });
-
-    //show the login form
-    app.get('/login', (req, res) => {
-        res.status(200).json({ message: 'Login Page' })
-    });
-
-    //show the signup form
-    app.get('/signup', (req, res) => {
-        res.status(200).json({ message: 'Signup Page' })
-    });
-
-    app.get('/profile', isLoggedIn, (req, res) => {
-        res.status(200).json({ message: 'Profile Page', user:req.user })
-    });
-
-
-//testing routes in db
-    app.get('/grades', (req, res) => {
-        Grade
-            .find()
-            .then(result => res.send(result))
-            .catch(errorHandler);
-    });
-
-    app.post('/grades', (req,res) => {
-        const requiredFields = ['className', 'assignment', 'grade', 'weight', 'semester']
-        for (let i = 0; i < requiredFields.length; i++) {
-            const field = requiredFields[i];
-            if (!(field in req.body)) {
-                const message = `Missing \`${field}\` in request body`;
-                console.error(message);
-                return res.status(400).send(message);
-            }
-        }
-        Grade   
-            .create({
-                className: req.body.className,
-                assignment: req.body.assignment,
-                grade: req.body.grade,
-                weight: req.body.weight,
-                semester: req.body.semester,
-                desiredGrade: req.body.desiredGrade,
-                finalGrade: req.body.finalGrade
-            })
-            .then(gradepost => res.status(201).json({
-                className: gradepost.className,
-                assignment: gradepost.assignment,
-                grade: gradepost.grade,
-                weight: gradepost.weight,
-                semester: gradepost.semester,
-                desiredGrade: gradepost.desiredGrade,
-                finalGrade: gradepost.finalGrade
-            }))
-            .catch(err => {
-                console.error(err);
-                res.status(500).json({ error: 'Something went wrong' });
-            });
-    })
-};
-
-
-//route middleware to make sure a user is logged in
-function isLoggedIn(req, res, next) {
-
-    //if user is authenticated in the session, carry on
-    if (req.isAuthenticated()) {
-        return next();
-    }
-    //if they aren't redirect them to the home page
-    else {
-        res.redirect('/')
-    }
-}
-
-//route middleware to make sure a user is logged in as an admin
-function isAdmin(req, res, next) {
-
-    //if user is authenticated in the session, carry on
-    if (req.isAuthenticated() && req.user.level == 'admin') {
-        return next();
-    }
-    //if they aren't redirect them to the home page
-    else {
-        res.redirect('/')
-    }
-}
-
-function errorHandler(err){
-    console.error(err);
-}

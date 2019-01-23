@@ -1,54 +1,36 @@
-<!-- views/login.ejs -->
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <title>Node Authentication</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <!-- load bootstrap css -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-    <!-- load fontawesome -->
-    <style>
-        body        { padding-top:80px; }
-    </style>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="./css/main.css" />
+    <script src="main.js"></script>
 </head>
 
 <body>
-    <div class="container">
 
-        <div class="col-sm-6 col-sm-offset-3">
+    <nav role="navigation">
+        <ul>
+            <li><img class="logo" src="logo.png" alt=""></li>
+            <li class="nav-title">Calculate Store Grades</li>
+        </ul>
+    </nav>
 
-            <h1><span class="fa fa-sign-in"></span> Login</h1>
+    <main class="auth-form" role="main">
+        <p class="sign">Log in</p>
+        <form class="sign-in" action="post">
+            <input class="un" type="text" placeholder="Username">
+            <input class="pass" type="text" placeholder="Password">
+            <input class="auth-submit" type="submit" value="Submit">
+        </form>
+    </main>
 
-            <!-- show any messages that come back with authentication -->
-            <% if (message.length > 0) { %>
-            <div class="alert alert-danger">
-                <%= message %>
-            </div>
-            <% } %>
-
-            <!-- LOGIN FORM -->
-            <form action="/login" method="post">
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="text" class="form-control" name="email">
-                </div>
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" class="form-control" name="password">
-                </div>
-
-                <button type="submit" class="btn btn-warning btn-lg">Login</button>
-            </form>
-
-            <hr>
-
-            <p>Need an account? <a href="/signup">Signup</a></p>
-            <p>Or go <a href="/">home</a>.</p>
-
-        </div>
-
-    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
