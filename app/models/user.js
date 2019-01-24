@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt-nodejs');
 
+
 mongoose.Promise = global.Promise;
 
 //define the schema for our user model
@@ -23,10 +24,6 @@ userSchema.pre('findOne', function (next) {
     this.populate('allGrades')
     next();
 })
-
-
-
-
 
 //methods ==================
 //generating a  hash

@@ -14,21 +14,21 @@ module.exports = function (app, passport) {
 //TESTING ROUTES
 ///////////////////////////////////////////////
     app.get('/', (req, res) => {
-        res.render('index')
+        res.render('index.ejs')
     });
 
     //show the login form
     app.get('/login', (req, res) => {
-        res.render('login')
+        res.render('login.ejs', { message: req.flash('loginMessage') })    
     });
 
     //show the signup form
     app.get('/signup', (req, res) => {
-        res.render('signup')
+        res.render('signup', { message: req.flash('signupMessage') })    
     });
 
     app.get('/profile', isLoggedIn, (req, res) => {
-        res.status(200).json({ message: 'Profile Page', user:req.user })
+        res.render('profile')
     });
 
 ///////////////////////////////////////////////////////////////
@@ -41,8 +41,15 @@ module.exports = function (app, passport) {
             .catch(errorHandler);
     });
 
+    app.get('/grades/:id', (req, res) => {
+        Grade
+            .find({userID:req.params.id})
+            .then(result => res.send(result))
+            .catch(errorHandler);
+    });
+
     app.post('/grades', (req,res) => {
-        const requiredFields = ['className', 'assignment', 'grades', 'weight', 'semester']
+        const requiredFields = ['className', 'assignment', 'grades', 'weight', 'semester','userID']
         for (let i = 0; i < requiredFields.length; i++) {
             const field = requiredFields[i];
             if (!(field in req.body)) {
@@ -60,6 +67,57 @@ module.exports = function (app, passport) {
             });
     })
 
+    app.put('/grades/:id', (req,res) => {
+        //it first checks if there is a req.params.id and if there is a req.body.id
+        //next it checks if the are equal.
+        //! if all it is not true than return an error
+        if (!(req.params.id && req.body.id && (req.params.id === req.body.id))) {
+            res.status(400).json({
+                error: `Request path id and request body id values must match`
+            });
+        }
+
+        const updated = {};
+        const updateableFields = ['className', 'assignment', 'grades', 'weight', 'semester'];
+        updateableFields.forEach(field => {
+            //so its saying {}.className for updated[field]
+            //req.body.className
+            //updated now becomes req.body
+            if (field in req.body) {
+                updated[field] = req.body[field];
+            }
+        })
+
+        Grade   
+            .findOne({_id:req.params.id || ''})
+            .then(() => {
+                Grade
+                //the first paramater is id
+                //{$set} prevents you from overwitting all the information from that set
+                //{new:true} this returns the new updated document instead of the original one
+                    .findByIdAndUpdate(req.params.id, {$set: updated}, {new:true})
+                    .then(updatedGrade => {
+                        res.status(200).json({
+                            className: updatedGrade.className,
+                            assignment: updatedGrade.assignment,
+                            grades: updatedGrade.grades,
+                            weight: updatedGrade.weight,
+                            semester: updatedGrade.semester
+                        })
+                    })
+                    .catch(err => res.status(500).json({message:err}))
+            })
+
+    })
+
+    app.delete('/grades/:id', (req,res) => {
+        Grade   
+            .findByIdAndRemove(req.params.id)
+            .then(() => {
+                console.log(`Deleted Grade with id ${req.params.id}`)
+                res.status(204).json({message:'success'})
+            })
+    })
     /////////////////////////
     //TESTING FOR USERS
     ////////////////////////////////////////
@@ -70,7 +128,52 @@ module.exports = function (app, passport) {
             .catch(errorHandler)
     });
 
+    app.put('/users/:id', (req, res) => {
+        //it first checks if there is a req.params.id and if there is a req.body.id
+        //next it checks if the are equal.
+        //! if all it is not true than return an error
+        if (!(req.params.id && req.body.id && (req.params.id === req.body.id))) {
+            res.status(400).json({
+                error: `Request path id and request body id values must match`
+            });
+        }
+
+        const updated = {};
+        const updateableFields = ['email', 'password'];
+        updateableFields.forEach(field => {
+            //so its saying {}.className for updated[field]
+            //req.body.className
+            //updated now becomes req.body
+            if (field in req.body) {
+                updated[field] = req.body[field];
+            }
+        })
+
+        User
+            .findOne({ _id: req.params.id || '' })
+            .then(() => {
+                User
+                    //the first paramater is id
+                    //{$set} prevents you from overwitting all the information from that set
+                    //{new:true} this returns the new updated document instead of the original one
+                    .findByIdAndUpdate(req.params.id, { $set: updated }, { new: true })
+                    .then(updatedUser => {
+                        res.status(200).json({
+                            "local": {
+                                "email": updatedUser.email,
+                                "password": updatedUser.password
+                            },
+                        })
+                    })
+                    .catch(err => res.status(500).json({ message: err }))
+            })
+    })
+
 };
+
+
+
+
 
 //route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {

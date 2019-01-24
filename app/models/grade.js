@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
-80
-
+const User = require('./user')
 mongoose.Promise = global.Promise;
 
 const gradeSchema = mongoose.Schema({
@@ -9,11 +8,25 @@ const gradeSchema = mongoose.Schema({
         grades: Number,
         weight: Number,
         desiredGrade: Number,
-        semester: String
+        semester: String,
+        userID: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
 },{
     usePushEach:true
 })
 
+gradeSchema.pre('find', function (next) {
+    this.populate('userID')
+    next();
+})
+
+gradeSchema.pre('findOne', function (next) {
+    this.populate('userID')
+    next();
+})
+
+gradeSchema.virtual('name').get(function(){
+    return `${this.userID.local.email}`
+})
 
 gradeSchema.virtual('averageGrade').get(function(){
     return `${this.grades * this.weight}`
@@ -33,7 +46,8 @@ gradeSchema.methods.serialize = function(){
         desiredGrade: this.desiredGrade,
         desiredGradeOutput: this.desiredGradeOutput,
         finalGrade: this.averageGrade,
-        semester:this.semester
+        semester:this.semester,
+        userID:this.name
     }
 }
 
