@@ -9,8 +9,8 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 
 const {DATABASE_URL, PORT, Test_DATABASE_URL} = require('./config/database.js');
-const Grade = require('./app/models/grade');
-const User = require('./app/models/user');
+const {Grade} = require('./app/models/grade');
+const {User} = require('./app/models/user');
 
 require('./config/passport')(passport); // pass passport for configuration
 

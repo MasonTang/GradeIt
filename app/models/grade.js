@@ -5,27 +5,25 @@ mongoose.Promise = global.Promise;
 const gradeSchema = mongoose.Schema({
         className: String,
         assignment: String,
-        grades: Number,
-        weight: Number,
+        grades: [Number],
+        weight: [Number],
         desiredGrade: Number,
         semester: String,
-        userID: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
-},{
-    usePushEach:true
+        user:{type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 })
 
-gradeSchema.pre('find', function (next) {
-    this.populate('userID')
+gradeSchema.pre('find', function(next){
+    this.populate('user')
     next();
 })
 
 gradeSchema.pre('findOne', function (next) {
-    this.populate('userID')
+    this.populate('user')
     next();
 })
 
-gradeSchema.virtual('name').get(function(){
-    return `${this.userID.local.email}`
+gradeSchema.virtual('username').get(function() {
+    return `${this.user}`
 })
 
 gradeSchema.virtual('averageGrade').get(function(){
@@ -36,9 +34,9 @@ gradeSchema.virtual('desiredGradeOutput').get(function(){
     return `${this.grades * this.weight}`
 })
 
-gradeSchema.methods.serialize = function(){
+gradeSchema.methods.seralize = function(){
     return {
-        id: this._id,
+        user: this.username,
         className: this.className,
         assignment: this.assignment,
         grades: this.grades,
@@ -47,9 +45,8 @@ gradeSchema.methods.serialize = function(){
         desiredGradeOutput: this.desiredGradeOutput,
         finalGrade: this.averageGrade,
         semester:this.semester,
-        userID:this.name
     }
 }
 
-
-module.exports = mongoose.model('Grade', gradeSchema);
+const Grade = mongoose.model("Grade", gradeSchema)
+module.exports = {Grade}

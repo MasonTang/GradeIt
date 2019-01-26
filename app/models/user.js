@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt-nodejs');
-
+const Grade = require('./grade')
 
 mongoose.Promise = global.Promise;
 
@@ -10,18 +10,18 @@ const userSchema = mongoose.Schema({
         email: String,
         password: String
     },
-    allGrades: [{type: mongoose.Schema.Types.ObjectId, ref:'Grade'}]
+    grade: { type: mongoose.Schema.Types.ObjectId, ref: 'Grade' }
 },{
     usePushEach:true
 });
 
-userSchema.pre('find', function(next){
-    this.populate('allGrades')
+userSchema.pre('find', function (next) {
+    this.populate('grade')
     next();
 })
 
 userSchema.pre('findOne', function (next) {
-    this.populate('allGrades')
+    this.populate('grade')
     next();
 })
 
@@ -37,4 +37,5 @@ userSchema.methods.validPassword = password => {
 };
 
 // create the model for users and expose it to our app
-module.exports = mongoose.model('User', userSchema);
+const User = mongoose.model("User", userSchema)
+module.exports = { User }
