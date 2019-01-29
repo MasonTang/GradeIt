@@ -32,7 +32,7 @@ userSchema.methods.generateHash = password => {
 };
 
 //checking if password is valid
-userSchema.methods.validPassword = password => {
+userSchema.methods.validPassword = function (password){
     return bcrypt.compareSync(password, this.local.password);
 };
 

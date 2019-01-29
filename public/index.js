@@ -1,3 +1,4 @@
+'use strict'
 //make a fetch request to own api
 //ejs
 let totalWeight = [];
@@ -6,9 +7,11 @@ let totalGrades = [];
 function calculateGrade(){
     $('.calculate-grade').click(function(e){
         e.preventDefault();
-        totalGrades = []
-        totalWeight = []
-        const sum = (a, b) => a + b; 
+        const totalGrades = [];
+        //totalWeight = [];
+        const arrayWeight = [];
+
+        const sum = (a, b) => parseInt(a) + parseInt(b); 
         //get the value of all the input of grades
         const grades = $('.grade').map(function() {
             return $(this).val();
@@ -17,26 +20,25 @@ function calculateGrade(){
         const weights = $('.weight').map(function () {
             return $(this).val();
         })
+        //push the values of weights to an arrayWeight
+        for (let i = 0; i < weights.length; i++) {
+            arrayWeight.push(weights[i]);
+        }
+        //filter out all the empty array strings
+        const onlyWeights = arrayWeight.filter(number => number != '')
+
         //multiplies the corresponding grades with weight to get totalGrades
         for(let i = 0; i < grades.length; i++){
             totalGrades.push((grades[i] * weights[i]))
         }
-
-        let sumWeight = 0;
-
-        for(let i = 0; i < weights.length; i++){
-            if(weights[i] === ''){
-                weights[i] === 0;
-            }
-            sumWeight += parseInt(weights[i])
-        }
-        totalWeight.push(sumWeight) 
-
-        //const totalWeight = weights.reduce(reducer);
-        const finalGrades = totalGrades.reduce(sum);
+        //all the weights added together
+        const totalWeight = onlyWeights.reduce(sum);
+        //sum of weights[i] and grades[i]
+        const sumMultGradeWeight = totalGrades.reduce(sum);
         //const reducetotalWeight = totalWeight.reduce(sum);
-        console.log(weights)        
-        console.log(totalWeight);
+        const finalGrade = (sumMultGradeWeight / totalWeight);
+        console.log(finalGrade)
+
     })
 }
 

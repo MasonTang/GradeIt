@@ -9,6 +9,12 @@ module.exports = function(app,passport) {
         failureFlash: true
     }));
 
+    app.post('/login', passport.authenticate('local-login', {
+        successRedirect: '/profile',
+        failureRedirect: '/login',
+        failureFlash: true
+    }));
+
     //logout
     app.get('/logout', function(req,res){
         req.logout();
