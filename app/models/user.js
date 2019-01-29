@@ -7,7 +7,7 @@ mongoose.Promise = global.Promise;
 //define the schema for our user model
 const userSchema = mongoose.Schema({
     local :{
-        email: String,
+        username: String,
         password: String
     },
     grade: { type: mongoose.Schema.Types.ObjectId, ref: 'Grade' }

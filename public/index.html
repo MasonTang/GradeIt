@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="screen" href="./css/main.css" />
-    <script src="main.js"></script>
 </head>
 <body>
 
@@ -30,23 +29,47 @@
     <main role="main">
         <h1 class="grade-calculator">Grade Calculator</h1>
         <form class="calculator" action="/post">
-            <fieldset>
+         <fieldset>
+            <div>
                 <input placeholder="Class Name" type="text" name="class-name" id="class-name">
                 <ul class="calc-header">
                     <li>Assignment</li>
                     <li>Grade %</li>
                     <li>Weight %</li>
                 </ul>
+            </div>
+
+            <div class="calc-form">
                 <ul class="calc-input">
-                    <li><input type="text" name="assignment" id="assignment"></li>
-                    <li><input type="number" name="grade-percent" id="grade-percent"></li>
-                    <li><input type="number" name="weight-percent" id="weight-percent"></li>
+                    <li><input class="assignment" type="text" name="assignment" id="assignment" placeholder="e.g. Homework"></li>
+                    <li><input class="grade" type="number" name="grade-percent" id="grade-percent"></li>
+                    <li><input class= "weight" type="number" name="weight-percent" id="weight-percent"></li>
                 </ul>
+                <ul class="calc-input">
+                    <li><input class="assignment" type="text" name="assignment" id="assignment" placeholder="e.g. Quiz"></li>
+                    <li><input class="grade" type="number" name="grade-percent" id="grade-percent"></li>
+                    <li><input class="weight" type="number" name="weight-percent" id="weight-percent"></li>
+                </ul>
+                <ul class="calc-input">
+                    <li><input class="assignment" type="text" name="assignment" id="assignment" placeholder="e.g. Test"></li>
+                    <li><input class="grade" type="number" name="grade-percent" id="grade-percent"></li>
+                    <li><input class="weight" type="number" name="weight-percent" id="weight-percent"></li>
+                </ul>
+                <ul class="calc-input">
+                    <li><input class="assignment" type="text" name="assignment" id="assignment" placeholder="e.g. Finals"></li>
+                    <li><input class="grade" type="number" name="grade-percent" id="grade-percent"></li>
+                    <li><input class="weight" type="number" name="weight-percent" id="weight-percent"></li>
+                </ul>
+            </div>
+
+            <div>
                 <p class="add-assignment">+ Add Assignment</p>
                 <label class="optional" for="final Grade">Optional: What do I need to make on the finals to make a <input class="final" type="number"> in
                     the class.</label>
                 <p></p>
                 <button class="calculate-grade" type="submit">Calculate Grade</button>
+                </div>
+
             </fieldset>
         </form>
     
@@ -56,6 +79,8 @@
     </main>
 
 <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-    crossorigin="anonymous"></script>
+crossorigin="anonymous"></script>
+<script src="index.js"></script>
+
 </body>
 </html>
