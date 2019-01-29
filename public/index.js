@@ -36,13 +36,37 @@ function calculateGrade(){
         //sum of weights[i] and grades[i]
         const sumMultGradeWeight = totalGrades.reduce(sum);
         //const reducetotalWeight = totalWeight.reduce(sum);
-        const finalGrade = (sumMultGradeWeight / totalWeight);
-        console.log(finalGrade)
+        const finalGrade = (sumMultGradeWeight / totalWeight).toFixed(2);
 
+        ///////////////////////////////////////////////////
+        //DESIRED GRADE
+        //////////////////////////////////////////////////
+        const desiredGrade = $('.final').val();
+        const leftOverWeight = 100 - totalWeight;
+        const neededGrade = (desiredGrade * 100 - sumMultGradeWeight) / (leftOverWeight)
+        console.log(finalGrade)
+        console.log(neededGrade)
+
+        ///////////////////////////////////////////////////
+        //DISPLAY GRADE
+        ///////////////////////////////////////////////////
+        $('.display-grade').empty();
+        $('.display-needed-grade').empty();
+
+        const displayFinalGrade = `<p>Your overall grade is a ${finalGrade}.</p>`;
+        
+        $(displayFinalGrade).appendTo($('.display-grade'));
+
+        const displayNeededGrade = `<p>You need to make a ${neededGrade} on your final or for the rest of your class to make a ${desiredGrade}.</p>`
+        
+        if(desiredGrade > 0){
+            $(displayNeededGrade).appendTo($('.display-needed-grade'));
+        }
     })
 }
 
 calculateGrade();
+
 
 function addAssignment(){
     $(".add-assignment").click(function(e){
