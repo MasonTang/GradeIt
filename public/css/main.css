@@ -116,9 +116,19 @@ label {
   margin-bottom: 1rem; }
 
 .add-class {
-  margin-left: 10%; }
+  margin-left: 1rem; }
   .add-class:hover {
     cursor: pointer; }
+
+.display-grade {
+  margin-left: 10%;
+  margin-top: 1rem;
+  font-size: 2rem; }
+
+.display-needed-grade {
+  margin-left: 10%;
+  margin-top: 0.5rem;
+  font-size: 1.6rem; }
 
 .auth-form {
   background-color: #FFFFFF;
@@ -236,6 +246,11 @@ ul {
 
 .nav-title {
   display: none; }
+
+.no-border {
+  border: none;
+  position: relative;
+  right: 10%; }
 
 .nav-title {
   font-size: 2rem;

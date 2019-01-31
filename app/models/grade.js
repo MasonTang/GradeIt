@@ -36,7 +36,7 @@ gradeSchema.virtual('desiredGradeOutput').get(function(){
 
 gradeSchema.methods.seralize = function(){
     return {
-        user: this.username,
+        user: this.user,
         className: this.className,
         assignment: this.assignment,
         grades: this.grades,
