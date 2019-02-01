@@ -11,7 +11,7 @@ const session = require('express-session');
 const {DATABASE_URL, PORT, Test_DATABASE_URL} = require('./config/database.js');
 const {Grade} = require('./app/models/grade');
 const {User} = require('./app/models/user');
-const {Semester} = require('./app/models/semester')
+
 
 require('./config/passport')(passport); // pass passport for configuration
 

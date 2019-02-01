@@ -1,8 +1,10 @@
 'use strict'
 //make a fetch request to own api
 //ejs
-let totalWeight = [];
-let totalGrades = [];
+function watchform (){
+    calculateGrade();
+    addAssignment();
+}
 
 function calculateGrade(){
     $('.calculate-grade').click(function(e){
@@ -80,14 +82,3 @@ function addAssignment(){
 }
 
 addAssignment();
-
-
-function signIn(){
-    // $('.sign-in').on('submit', function(event){
-    //     event.preventDefault();
-    //     //window.location() = "/profile";
-    //     console.log('/profile');
-    // })
-   console.log('testing');
-}
-signIn()

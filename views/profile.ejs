@@ -21,15 +21,15 @@
     </nav>
     
     <main class="profile" role="main">
-        <h1>Welcome Mason</h1>
+        <h1>Welcome <%= user.local.username %> </h1>
         <h3>Store and Calculate your grades from semester to semester</h3>
     
     
-        <form method="POST" action="/grades/<%= user._id%>">
+        <form method="POST" action="/grades/:<%= user._id%> class="profile-calc">
     
             <fieldset class="no-border">
-                <input placeholder="Fall,2018" type="text" name="semester" id="semester">
                 <p class="new-semester">+ Add New Semester</p>
+                <input placeholder="Fall,2018" type="text" name="semester" id="semester">
             </fieldset>
     
             <fieldset class="profile-calculator">
@@ -88,15 +88,19 @@
             <fieldset class="append-new-class">
     
             </fieldset>
-    
+            
+            <input type="submit" value="Save Semester">
+
         </form>
+
+        <section class="append-new-semester">
+        
+        </section>
     
     </main>
     
-    <section class="append-new-semester">
     
-    </section>
-</nav>
+
 
 
                     
@@ -108,7 +112,8 @@
 
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
         crossorigin="anonymous"></script>
-    <script src="/index.js"></script>
+    <script src="/profile.js"></script>
+    <script src="/calculator.js"></script>
 </body>
 
 </html>

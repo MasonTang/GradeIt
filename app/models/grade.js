@@ -4,7 +4,7 @@ mongoose.Promise = global.Promise;
 
 const gradeSchema = mongoose.Schema({
         className: String,
-        assignment: String,
+        assignment: [String],
         grades: [Number],
         weight: [Number],
         desiredGrade: Number,

@@ -252,6 +252,9 @@ ul {
   position: relative;
   right: 10%; }
 
+.new-semester {
+  cursor: pointer; }
+
 .nav-title {
   font-size: 2rem;
   -webkit-box-align: center;
