@@ -14,12 +14,19 @@ function watchform(){
 }
 watchform();
 
+
+
 function addSemester(){
     $('.profile').on('click','.new-semester', function(e){
+        const semester = $('#semester').val();
         const calculator = ` <form method="POST" action="/grades/:<%= user._id%> class="profile-calc">
-    
+
             <fieldset class="no-border">
-                <input placeholder="Fall,2018" type="text" name="semester" id="semester">
+            
+            <input placeholder="Fall,2018" type="text" name="semester" id="semester">
+            
+            <button class="save-semester">Save </button>
+            
             </fieldset>
     
             <fieldset class="profile-calculator">
@@ -75,22 +82,27 @@ function addSemester(){
     
             </fieldset>
             
-            <button class="save-semester">Save </button>
+            <div class="add-semester">
+        
+            </div>
 
         </form>`
+
+        
         $(calculator).appendTo($('.append-new-semester'));
     })
 }
 
 function addClass(){
     $('.append-new-semester').on('click','.add-class', function(e){
+        const semester = $('#semester').val();
+        console.log(semester);
+        //e.target
         const addClass = `<form method="POST" action="/grades/:<%= user._id%> class="profile-calc">
     
             <fieldset class="profile-calculator">
                 <div>
                     <input placeholder="Class Name" type="text" name="class-name" id="class-name">
-
-                    <button class="save-semester">Save </button>
                     
                     <ul class="calc-header">
                         <li>Assignment</li>
@@ -144,16 +156,21 @@ function addClass(){
 
         </form>`
 
-            
-        $('.append-new-class').append(addClass);
+        console.log(semester);   
+        $(event.target).closest("div").append(addClass); 
+        $('#semester').append(addClass);
 
         //$(addClass).appendTo($('.append-new-class'));
     })
 }
 
 function saveSemester(){
+    $('.save-semester').click(function(e){
+        e.preventDefault();
+    })
+
     $('.append-new-semester').on('click', '.save-semester', function(e) {
         e.preventDefault();
-        $('.profile-calculator').hide();
+        $('.profile-calculator').toggle();
     })
 }

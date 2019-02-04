@@ -6,6 +6,8 @@ function watchform (){
     addAssignment();
 }
 
+watchform();
+
 function calculateGrade(){
     $('.calculate-grade').click(function(e){
         e.preventDefault();
@@ -81,4 +83,3 @@ function addAssignment(){
     }) 
 }
 
-addAssignment();

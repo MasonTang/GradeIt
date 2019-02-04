@@ -61,7 +61,7 @@ header {
 .grade-calculator {
   text-align: center; }
 
-form {
+.calculator {
   width: 80%;
   margin-left: 10%;
   margin-top: 2%; }
@@ -230,16 +230,15 @@ nav {
   height: 11vh;
   width: 100%;
   position: relative; }
-
-ul {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-pack: distribute;
-  justify-content: space-around;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center; }
+  nav ul {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center; }
 
 .logo {
   width: 8rem; }
@@ -254,6 +253,30 @@ ul {
 
 .new-semester {
   cursor: pointer; }
+
+.semester {
+  padding: 13px;
+  border: 3px solid black;
+  margin-bottom: 50px; }
+
+.class-form {
+  padding: 10px; }
+
+.classDetails {
+  margin-left: 10px; }
+
+.assignments {
+  margin-left: 10px; }
+
+.assignmentslist {
+  list-style: none;
+  padding: 0; }
+
+.assignment-item {
+  margin: 10px 0; }
+
+.new-class {
+  margin: 10px 0 0 20px; }
 
 .nav-title {
   font-size: 2rem;
