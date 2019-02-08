@@ -2,7 +2,10 @@ module.exports = function (app, passport) {
     const express = require("express");
     const mongoose = require('mongoose');
     const {User} = require('../models/user');
-    const {Grade} = require('../models/grade')
+    const {Grade} = require('../models/grade');
+    const {Class} = require('../models/class');
+    const {Semester} = require('../models/semester');
+    const {Assignment} = require('../models/assignment');
     const bodyParser = require('body-parser');
     const uuid = require('uuidv4')
 
@@ -30,9 +33,14 @@ module.exports = function (app, passport) {
         res.render('signup', { message: req.flash('signupMessage') })    
     });
 
-    app.get('/profile', isLoggedIn, (req, res) => {
-        console.log('profile')
-        res.render('profile', {user:req.user})
+    //show semester form
+    app.get('/semester', isLoggedIn, (req, res) => {
+        res.render('semester', {user:req.user})
+    });
+
+    //show class form
+    app.get('/class', (req, res) => {
+        res.render('class')
     });
 
 ///////////////////////////////////////////////////////////////
@@ -46,19 +54,19 @@ module.exports = function (app, passport) {
     });
 
     app.post('/grades', (req,res) => {
-        const requiredFields = ['className', 'assignment', 'grades', 'weight', 'semester','userId']
-        for (let i = 0; i < requiredFields.length; i++) {
-            const field = requiredFields[i];
-            if (!(field in req.body)) {
-                const message = `Missing \`${field}\` in request body`;
-                console.error(message);
-                return res.status(400).send(message);
-            }
-        }
+        // const requiredFields = ['userId']
+        // for (let i = 0; i < requiredFields.length; i++) {
+        //     const field = requiredFields[i];
+        //     if (!(field in req.body)) {
+        //         const message = `Missing \`${field}\` in request body`;
+        //         console.error(message);
+        //         return res.status(400).send(message);
+        //     }
+        // }
+        let userId = req.user._id
         User
-            .findById(req.body.userId)
+            .findById(userId)
             .then(user => {
-                console.log(user)
                 if(user){
                     Grade
                         .create({
@@ -67,7 +75,7 @@ module.exports = function (app, passport) {
                             grades: req.body.grades,
                             weight:req.body.weight,
                             semester: req.body.semester,
-                            user: req.body.userId,
+                            user: userId,
                             desiredGrade: req.body.desiredGrade
                         })
                         .then(grade => {
@@ -85,6 +93,8 @@ module.exports = function (app, passport) {
                 }
             })   
     })
+
+    //app.post('/semester', (req,res))
 
     app.delete('/grades/:gradeId', (req,res) => {
         Grade
@@ -113,34 +123,6 @@ module.exports = function (app, passport) {
             .catch(errorHandler);
     });
 
-
-
-    // app.put('/grades/:gradeId', (req, res) => {
-    //     //grab the information in the body
-    //     const grades = {
-    //         className: req.body.className,
-    //         assignment: req.body.assignment,
-    //         grades: req.body.grades,
-    //         weight: req.body.weight,
-    //         desiredGrade: req.body.desiredGrade,
-    //         semester: req.body.semester,
-    //         finalGrade:req.body.finalGrade,
-    //         gradeId:uuid()
-    //     }
-    //     //find the user by the id and push the grades information in it
-    //     User.findById(req.params.userId)
-    //         .then(user => {
-    //             console.log(user)
-    //             //user.grades.push(grades)
-
-    //             Grade.save(err => {
-    //                 if(err){
-    //                     res.send(err)
-    //                 }
-    //                 res.json(user)
-    //             })
-    //         })
-    // })
 //edit individual grades
     app.put('/grades/:gradeId', (req, res) => {
         //it first checks if there is a req.params.id and if there is a req.body.id
@@ -196,8 +178,237 @@ module.exports = function (app, passport) {
            })
     })
 
-};
+/////////////////////////
+    //Semester
+////////////////////////////////////////
 
+    app.get('/semester/all', function(req, res) {
+        Semester
+            .find()
+            .then(result => res.send(result))
+            .catch(errorHandler);
+    })
+
+    app.get('/api/semester', function (req, res) {
+        Semester
+            .find({user: req.user._id})
+            .then(result => res.send(result))
+            .catch(errorHandler);
+    })
+
+    app.post('/api/semester', function (req, res) {
+        const requiredFields = ['semester']
+        for (let i = 0; i < requiredFields.length; i++) {
+            const field = requiredFields[i];
+            if (!(field in req.body)) {
+                const message = `Missing \`${field}\` in request body`;
+                console.error(message);
+                return res.status(400).send(message);
+            }
+        }
+
+        User
+            .find({user: req.user._id})
+                .then(user => {
+                    if (user) {
+                        console.log(user)
+                        Semester
+                            .create({
+                                semester: req.body.semester,
+                                user: req.user._id,
+                            })
+                            .then(semester => {
+                                    res.status(201).json({
+                                        user: semester.user,
+                                        semester: semester.semester,
+                                        semesterId: semester._id
+                                    })
+                            })
+                            .catch(err => {
+                                console.error(err);
+                                res.status(500).json({ error: 'Something went wrong' })
+                            })
+                    }
+                    else {
+                        const message = 'author not found';
+                        console.error(message);
+                        return res.status(400).send(message)
+                    }
+                })
+        })
+
+    app.put('/api/semester', function (req, res) {
+        const updated = {};
+        const updateableFields = ['semester'];
+        updateableFields.forEach(field => {
+            //so its saying {}.className for updated[field]
+            //req.body.className
+            //updated now becomes req.body
+            if (field in req.body) {
+                updated[field] = req.body[field];
+            }
+        })
+
+        Semester
+            .findByIdAndUpdate(req.user._id, { $set: updated }, { new: true })
+            .then(updatedSemester => res.status(200).json({
+                semester: updatedSemester.semester
+            }))
+            .catch(err => res.status(500).json({ message: "Internal server error" }))
+    });
+      
+
+    app.delete('/api/semester', function (req, res) {
+        Semester
+            .findByIdAndRemove(req.body.semesterId)
+            .then((semester) => res.status(204).end())
+            .catch(err => res.status(500).json({message:"Internal server error"}))
+    })
+
+/////////////////////////
+//Class
+////////////////////////////////////////
+
+    app.get('/class/all', function (req, res) {
+        Class
+            .find()
+            .then(result => res.send(result))
+            .catch(errorHandler);
+    })
+
+    app.get('/api/class', function (req, res) {
+        Class
+            .find({ semester: req.semester._id })
+            .then(result => res.send(result))
+            .catch(errorHandler);
+    })
+
+    app.post('/api/class', function (req, res) {
+        const requiredFields = ['class']
+        for (let i = 0; i < requiredFields.length; i++) {
+            const field = requiredFields[i];
+            if (!(field in req.body)) {
+                const message = `Missing \`${field}\` in request body`;
+                console.error(message);
+                return res.status(400).send(message);
+            }
+        }
+
+        Semester
+            .findById(req._id)
+            .then(semester => {
+                if (semester) {
+                    Class
+                        .create({
+                            class: req.body.class,
+                            semester: req._id,
+                        })
+                        .then(classes => {
+                            res.status(201).json({
+                                class:classes.class,
+                                semester:classes.semester,
+                                classId: classes._id
+                            })
+                        })
+                        .catch(err => {
+                            console.error(err);
+                            res.status(500).json({ error: 'Something went wrong' })
+                        })
+                }
+                else {
+                    const message = 'semester not found';
+                    console.error(message);
+                    return res.status(400).send(message)
+                }
+            })
+    })
+
+app.put('/class/:classId', function (req, res) {
+    const updated = {};
+    const updateableFields = ['class'];
+    updateableFields.forEach(field => {
+        //so its saying {}.className for updated[field]
+        //req.body.className
+        //updated now becomes req.body
+        if (field in req.body) {
+            updated[field] = req.body[field];
+        }
+    })
+
+    Class
+        .findByIdAndUpdate(req.params.classId, { $set: updated }, { new: true })
+        .then(updatedClass => res.status(200).json({
+            class: updatedClass.class
+        }))
+        .catch(err => res.status(500).json({ message: "Internal server error" }))
+    });
+
+
+app.delete('/api/class', function (req, res) {
+    Class
+        .findByIdAndRemove(req.body.classId)
+        .then((classes) => res.status(204).end())
+        .catch(err => res.status(500).json({ message: "Internal server error" }))
+})
+
+/////////////////////////
+//Assignment
+////////////////////////////////////////
+
+app.get('/assignment', function (req, res) {
+    Assignment
+        .find()
+        .then(result => res.send(result))
+        .catch(errorHandler);
+})
+
+app.post('/assignment/classId', function (req, res) {
+    const requiredFields = ['assignment','weight', 'grade']
+    for (let i = 0; i < requiredFields.length; i++) {
+        const field = requiredFields[i];
+        if (!(field in req.body)) {
+            const message = `Missing \`${field}\` in request body`;
+            console.error(message);
+            return res.status(400).send(message);
+        }
+    }
+
+    Class
+        .findById(req.params.classId)
+        .then(classes => {
+            if (classes) {
+                Assignment
+                    .create({
+                        assignment: req.body.assignment,
+                        weight: req.body.weight,
+                        grade:req.body.grade,
+                        class: req.params.classId,
+                    })
+                    .then(assignment => {
+                        res.status(201).json(assignment.seralize())
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        res.status(500).json({ error: 'Something went wrong' })
+                    })
+            }
+            else {
+                const message = 'class not found';
+                console.error(message);
+                return res.status(400).send(message)
+            }
+        })
+})
+
+app.put('/assignment', function (req, res) {
+
+})
+
+app.delete('/assignment', function (req, res) {
+
+})
+
+}
 //route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
 

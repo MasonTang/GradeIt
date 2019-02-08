@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="./css/main.css" />
+
+</head>
+
+<body>
+
+    <nav role="navigation">
+        <ul>
+            <li><a href=""> ->Class </a></li>
+            <li><a href="/"><img class="logo" src="logo.png" alt=""></li></a>
+            <li class="nav-title">Calculate Store Grades</li>
+        </ul>
+    </nav>
+
+    <main role="main">
+
+        <div class="welcome" role="region">
+            <h1>_________ Class</h1>
+        </div>
+
+        
+        
+            <h2 class="class-name"></h2>
+
+            <h3>Assignments:</h3>
+            <div class="assignments">
+                <ul class="assignmentslist">
+                    <li class="assignment-item">
+                        <form action="/assignment" method="POST" class="assignment-form">
+                            <input type="text" placeholder="assignment">
+                            <input type="text" placeholder="weight %">
+                            <input type="text" placeholder="grades %">
+                            <input type="submit" value="Save" />
+                        </form>
+                    </li>
+                </ul>
+                <button class="new-assignment">Add New Assignment </button>
+            </div>
+        </div>
+
+        <section class="get-class" role="region">
+            <form action="/assignment" method="GET"></form>
+        </section>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <script src="profile2.js"></script>
+    <script src="calculator.js"></script>
+    <script src="profile.js"></script>
+
+</body>
+
+</html>

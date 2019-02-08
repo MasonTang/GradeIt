@@ -29,12 +29,12 @@ function addClass() {
     $('body').on('click', '.new-class', (e) => {
         $(e.target).siblings('.classDetails').append(`
     <form class="class-form">
+        <hr>
           <p>
             <input type="text" placeholder="Class Name">
             <input type="submit" value="Save"/>
           </p>
         </form>
-          
           <h3>Assignments:</h3>
           <div class="assignments">
             <ul class="assignmentslist">
@@ -49,6 +49,7 @@ function addClass() {
             </ul>
             <button class="new-assignment">Add New Assignment</button>
           </div>
+          
     `)
     });
 }
@@ -98,9 +99,17 @@ function saveSemester() {
     $('body').on('submit', '.semester-form', (e) => {
         e.preventDefault();
         let name = $(e.target).children('input[type="text"]').val();
+        //let user = req.user._id. Its automatically in the data
         // save it to the db w/ an ajax call
         $(e.target).hide();
         $(e.target).siblings('.semester-name').html(name + " | <button class='edit-semester'>Edit</button>").show();
+        $.ajax({
+            type: "POST",
+            url: "/grades",
+            data: JSON.stringify({ semester: name }),
+            success: success,
+            dataType: "json"
+        });
     });
 }
 
@@ -119,7 +128,7 @@ function saveClass(){
         let name = $(e.target).children('input[type="text"]').val();
         // save it to the db w/ an ajax call
         $(e.target).hide();
-        $(e.target).siblings('.class-name2').html(name + " | <button class='edit-class'>Edit</button>").show();
+        $(e.target).siblings('.class-name').html(name + " | <button class='edit-class'>Edit</button>").show();
     });
 }
 

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
+
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Page Title</title>
@@ -15,39 +16,36 @@
 
     <nav role="navigation">
         <ul>
+            <li><a href="/semester"> -< Semester </a></li>
             <li><a href="/"><img class="logo" src="logo.png" alt=""></li></a>
             <li class="nav-title">Calculate Store Grades</li>
         </ul>
     </nav>
 
-    <main class="profile" role="main">
-        <h1>Welcome
-            <%= user.local.username %>
-        </h1>
-        <h3>Store and Calculate your grades from semester to semester</h3>
+    <main role="main">
 
+        <div class="welcome" role="region">
+            <h1>Classes from Semester _________</h1>
+        </div>
 
-        <form method="POST" action="/grades/:<%= user._id%> class=" profile-calc">
-
-            <fieldset class="no-border">
-                <p class="new-semester">+ Add New Semester</p>
-            </fieldset>
-
-        </form>
-
-        <section class="append-new-semester">
-        
+        <section role="region">
+            <h1>Add Classes</h1>
+            <form action="/class" method="POST">
+                <input type="text" placeholder="Chemistry">
+                <input type="submit" value="Add">
+            </form>
         </section>
 
-        
-
-
+        <section class="get-class" role="region">
+            <form action="/class" method="get"></form>
+        </section>
     </main>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <script src="profile2.js"></script>
     <script src="calculator.js"></script>
     <script src="profile.js"></script>
+
 </body>
 
 </html>

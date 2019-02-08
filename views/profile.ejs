@@ -13,98 +13,60 @@
 
 <body>
     
-    <nav role="navigation">
-        <ul>
-            <li><a href="/"><img class="logo" src="logo.png" alt=""></li></a>
-            <li class="nav-title">Calculate Store Grades</li>
-        </ul>
-    </nav>
-    
-    <main class="profile" role="main">
-        <h1>Welcome <%= user.local.username %> </h1>
-        <h3>Store and Calculate your grades from semester to semester</h3>
-    
-    
-        <form method="POST" action="/grades/:<%= user._id%> class="profile-calc">
-    
-            <fieldset class="no-border">
-                <p class="new-semester">+ Add New Semester</p>
-                <input placeholder="Fall,2018" type="text" name="semester" id="semester">
-            </fieldset>
-    
-            <fieldset class="profile-calculator">
-                <div>
-                    <input placeholder="Class Name" type="text" name="class-name" id="class-name">
-                    <ul class="calc-header">
-                        <li>Assignment</li>
-                        <li>Grade %</li>
-                        <li>Weight %</li>
-                    </ul>
-                </div>
-    
-                <div class="calc-form">
-                    <ul class="calc-input">
-                        <li><input class="assignment" type="text" name="assignment" id="assignment" placeholder="e.g. Homework"></li>
-                        <li><input class="grade" type="number" name="grade-percent" id="grade-percent"></li>
-                        <li><input class="weight" type="number" name="weight-percent" id="weight-percent"></li>
-                    </ul>
-                    <ul class="calc-input">
-                        <li><input class="assignment" type="text" name="assignment" id="assignment" placeholder="e.g. Quiz"></li>
-                        <li><input class="grade" type="number" name="grade-percent" id="grade-percent"></li>
-                        <li><input class="weight" type="number" name="weight-percent" id="weight-percent"></li>
-                    </ul>
-                    <ul class="calc-input">
-                        <li><input class="assignment" type="text" name="assignment" id="assignment" placeholder="e.g. Test"></li>
-                        <li><input class="grade" type="number" name="grade-percent" id="grade-percent"></li>
-                        <li><input class="weight" type="number" name="weight-percent" id="weight-percent"></li>
-                    </ul>
-                    <ul class="calc-input">
-                        <li><input class="assignment" type="text" name="assignment" id="assignment" placeholder="e.g. Finals"></li>
-                        <li><input class="grade" type="number" name="grade-percent" id="grade-percent"></li>
-                        <li><input class="weight" type="number" name="weight-percent" id="weight-percent"></li>
-                    </ul>
-                </div>
-    
-                <div>
-                    <p class="add-assignment">+ Add Assignment</p>
-                    <label class="optional" for="final Grade">Optional: What do I need to make on the finals to make a
-                        <input class="final" type="number"> in
-                        the class.</label>
-                    <p></p>
-                    <button class="calculate-grade" type="submit">Calculate Grade</button>
-                    <p class="add-class">+ Add Class</p>
-                </div>
-    
-                <div class="display-grade">
-    
-                </div>
-    
-                <div class="display-needed-grade">
-    
-                </div>
-    
-            </fieldset>
-    
-            <fieldset class="append-new-class">
-    
-            </fieldset>
-            
-            <input type="submit" value="Save Semester">
+<nav role="navigation">
+    <ul>
+        <li><a href="/"><img class="logo" src="logo.png" alt=""></li></a>
+        <li class="nav-title">Calculate Store Grades</li>
+    </ul>
+</nav>
 
-        </form>
+<main class="profile" role="main">
+    <h1>Welcome
+        <%= user.local.username %>
+    </h1>
+    <h3>Store and Calculate your grades from semester to semester</h3>
 
-        <section class="append-new-semester">
-        
-        </section>
-    
-    </main>
-    
-    
+    <div class="grades">
+        <div class="semester">
 
+            <form class="semester-form">
+                <input type="text" placeholder="Semester" />
+                <input type="submit" value="Save" />
+            </form>
 
+            <h2 class="semester-name"></h2>
 
-                    
-                        
+            <div class="classDetails">
+                <form class="class-form">
+                    <input type="text" placeholder="Class Name">
+                    <input type="submit" value="Save" />
+                </form>
+
+                <h2 class="class-name"></h2>
+
+                <h3>Assignments:</h3>
+                <div class="assignments">
+                    <ul class="assignmentslist">
+                        <li class="assignment-item">
+                            <form action="#" class="assignment-form">
+                                <input type="text" placeholder="assignment">
+                                <input type="text" placeholder="weight">
+                                <input type="text" placeholder="grades">
+                                <input type="submit" value="Save" />
+                            </form>
+                        </li>
+                    </ul>
+                    <button class="new-assignment">Add New Assignment </button>
+                </div>
+            </div>
+
+            <button class="new-class">Add New Class</button>
+
+        </div>
+    </div>
+    <button class="new-semester">Add New Semester</button>
+
+</main>               
 <!--                        
                         <%= user.local.username %>
       -->
@@ -112,8 +74,8 @@
 
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
         crossorigin="anonymous"></script>
-    <script src="/profile.js"></script>
     <script src="/calculator.js"></script>
+    <script src="/profile2.js"></script>
 </body>
 
 </html>
