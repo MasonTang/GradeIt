@@ -154,7 +154,7 @@ module.exports = function (app, passport) {
 
     app.get('/class/:semesterId', function (req, res) {
         Semester
-            .find({ semester: req.params.semesterId })
+            .findById(req.params.semesterId )
             .then(result => {
                 res.render('class', {user:req.user, semester:result})
             })
@@ -178,8 +178,7 @@ module.exports = function (app, passport) {
                 semester: req.params.semesterId
             })
             .then(classes => {
-                console.log(classes)
-                res.redirect(`/class/:${classes.semester._id}`)
+                res.redirect(`/class/${classes.semester}`)
             })
             .catch(err => {
                 console.error(err);

@@ -6,7 +6,6 @@ mongoose.Promise = global.Promise;
 const classSchema = mongoose.Schema({
     class: String,
     semester: { type: mongoose.Schema.Types.ObjectId, ref: 'Semester' },
-    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 })
 
 classSchema.pre('find', function (next) {
