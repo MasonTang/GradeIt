@@ -30,19 +30,24 @@
         </div>
     
         <section role="region">
+        <form method="POST" action="/api/semester">
             <h1>Add Semester</h1>
-            <input  id="input-semester" type="text" placeholder="Fall, 2018">
-            <button id="add-semester">Add</button>
+            <input  id="input-semester" name="semester" type="text" placeholder="Fall, 2018">
+            <input type="submit" value="Submit">
+        </form>
         </section>
     
         <ul id="get-semester">
-    
+            <% semesters.forEach(function(semester){%>
+                <li class="addSemesterLayout">
+                    <a href="/class/<%=semester._id%>"><%=semester.semester%></a>
+                    <button data-id='<%=semester._id%>' class="remove">X</button>
+                </li>
+            <%})%>
         </ul>
     
     </main>
-    <!--                        
-                        <%= user.local.username %>
-      -->
+  
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
         crossorigin="anonymous"></script>
     <script src="/profile3.js"></script>

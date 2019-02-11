@@ -8,14 +8,14 @@
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" media="screen" href="./css/main.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/main.css" />
 </head>
 
 <body>
 
     <nav role="navigation">
         <ul>
-            <li><a href="/semester"> -< Semester </a> </li> <li><a href="/"><img class="logo" src="logo.png" alt=""></li></a>
+            <li><a href="/semester"> -< Semester </a> </li> <li><a href="/"><img class="logo" src="../logo.png" alt=""></li></a>
             <li class="nav-title">Calculate Store Grades</li>
         </ul>
     </nav>
@@ -23,25 +23,23 @@
     <main role="main">
     
         <div class="welcome" role="region">
-            <h1>Classes from Semester _________</h1>
+            <h1>Classes from Semester </h1>
+            <h2><%= user.local.username %>k</h2>
         </div>
     
         <section role="region">
             <h1>Add Classes</h1>
-            <form action="/class" method="POST">
-                <input type="text" placeholder="Chemistry">
+            <form action="/class/<%=semester._id%>" method="POST">
+                <input type="text" name="class" placeholder="Chemistry">
                 <input type="submit" value="Add">
             </form>
         </section>
-    
-        <section class="get-class" role="region">
-            <form action="/class" method="get"></form>
-        </section>
+
+
     </main>
     
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
         crossorigin="anonymous"></script>
-    <script src="/calculator.js"></script>
     <script src="/profile3.js"></script>
 </body>
 

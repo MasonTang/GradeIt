@@ -32,7 +32,7 @@ classSchema.pre('findOne', function (next) {
 classSchema.methods.seralize = function () {
     return {
         semester: this.semester,
-        class: this.classId,
+        class: this.class,
     }
 }
 
