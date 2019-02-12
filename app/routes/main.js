@@ -154,11 +154,17 @@ module.exports = function (app, passport) {
 
     app.get('/class/:semesterId', function (req, res) {
         Semester
-            .findById(req.params.semesterId )
-            .then(result => {
-                res.render('class', {user:req.user, semester:result})
+            .findOne({_id:req.params.semesterId})
+            .then(semesters => {
+                if(semesters){
+                    Class
+                        .find({ semester: req.params.semesterId })
+                        .then(results => {
+                            res.render('class', { classes: results, semester: semesters })
+                        })
+                }
             })
-            .catch(errorHandler);
+            
     })
 
     app.post('/class/:semesterId', function (req, res) {
@@ -177,8 +183,13 @@ module.exports = function (app, passport) {
                 class: req.body.class,
                 semester: req.params.semesterId
             })
-            .then(classes => {
-                res.redirect(`/class/${classes.semester}`)
+            .then(() => {
+                Class
+                .findOne({semester:req.params.semesterId})
+                .then((classes) => {
+                    res.redirect(`/class/${classes.semester._id}`)
+                })
+                
             })
             .catch(err => {
                 console.error(err);

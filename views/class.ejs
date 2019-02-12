@@ -15,7 +15,7 @@
 
     <nav role="navigation">
         <ul>
-            <li><a href="/semester"> -< Semester </a> </li> <li><a href="/"><img class="logo" src="../logo.png" alt=""></li></a>
+            <li><a href="/semester"> -< Semester </a> </li> <li><a href="/semester/"><img class="logo" src="../logo.png" alt=""></li></a>
             <li class="nav-title">Calculate Store Grades</li>
         </ul>
     </nav>
@@ -23,19 +23,25 @@
     <main role="main">
     
         <div class="welcome" role="region">
-            <h1>Classes from Semester </h1>
-            
-            <h2> <%= semester %> </h2>
+            <h1>Semester <%= semester.semester %></h1>
         </div>
     
         <section role="region">
             <h1>Add Classes</h1>
-            <form action="/class/<%=semester._id%>" method="POST">
+            <form action="/class/<%= semester._id %>" method="POST">
                 <input type="text" name="class" placeholder="Chemistry">
                 <input type="submit" value="Add">
             </form>
         </section>
 
+    <ul id="get-class">
+        <% classes.forEach(function(classe){%>
+        <li class="addClassLayout">
+            <a href="/class/<%=classe._id%>"><%=classe.class%></a>
+            <button data-id='<%=classe._id%>' class="remove">X</button>
+        </li>
+        <%})%>
+    </ul>
 
     </main>
     
