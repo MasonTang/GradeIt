@@ -6,6 +6,7 @@ const getSem = $('#get-semester')
 function watchForm(){
     deleteSemester();
     deleteClass();
+    deleteAssignment();
 }
 watchForm();
 
@@ -45,8 +46,32 @@ function deleteClass() {
 
         $.ajax({
             type: 'Delete',
-            url: '/api/semester',
+            url: '/api/class',
             data: classId,
+            success: function () {
+                closestli.remove();
+            },
+            error: function () {
+                alert('error saving error');
+            }
+        })
+    })
+}
+
+function deleteAssignment() {
+
+    $('#get-assignment').on('click', 'button', function (e) {
+
+        let dataId = $(this).attr('data-id');
+        const assignmentId = {
+            assignmentId: dataId
+        };
+        const closestli = $(this).closest('li');
+
+        $.ajax({
+            type: 'Delete',
+            url: '/api/assignment',
+            data: assignmentId,
             success: function () {
                 closestli.remove();
             },

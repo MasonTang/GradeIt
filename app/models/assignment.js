@@ -3,9 +3,9 @@ const Class = require('./class')
 mongoose.Promise = global.Promise;
 
 const assignmentSchema = mongoose.Schema({
-    assignment: [String],
-    grade: [Number],
-    weight: [Number],
+    assignment: String,
+    grade: Number,
+    weight: Number,
     class: { type: mongoose.Schema.Types.ObjectId, ref: 'Class' }
 })
 

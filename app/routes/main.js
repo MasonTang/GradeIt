@@ -157,6 +157,7 @@ module.exports = function (app, passport) {
             .findOne({_id:req.params.semesterId})
             .then(semesters => {
                 if(semesters){
+                    let Id = semesters._id
                     Class
                         .find({ semester: req.params.semesterId })
                         .then(results => {
@@ -229,14 +230,31 @@ app.delete('/api/class', function (req, res) {
 //Assignment
 ////////////////////////////////////////
 
-app.get('/assignment', function (req, res) {
+app.get('/assignment/all' , function(req,res) {
     Assignment
-        .find()
-        .then(result => res.send(result))
+    .find()
+    .then(result => {
+        res.send(result);
+    })
+    .catch(errorHandler)
+})
+
+app.get('/assignment/:classId', function (req, res) {
+    Class
+        .findOne({_id:req.params.classId})
+        .then(classes => {
+            if(classes){
+                Assignment
+                    .find({class:req.params.classId})
+                    .then(assignments => {
+                        res.render('assignment', {classe:classes, assignment:assignments})
+                    })
+            }
+        })
         .catch(errorHandler);
 })
 
-app.post('/assignment/classId', function (req, res) {
+app.post('/assignment/:classId', function (req, res) {
     const requiredFields = ['assignment','weight', 'grade']
     for (let i = 0; i < requiredFields.length; i++) {
         const field = requiredFields[i];
@@ -246,40 +264,38 @@ app.post('/assignment/classId', function (req, res) {
             return res.status(400).send(message);
         }
     }
-
-    Class
-        .findById(req.params.classId)
-        .then(classes => {
-            if (classes) {
+        Assignment
+            .create({
+                assignment: req.body.assignment,
+                weight: req.body.weight,
+                grade:req.body.grade,
+                class: req.params.classId,
+            })
+            .then(() => {
                 Assignment
-                    .create({
-                        assignment: req.body.assignment,
-                        weight: req.body.weight,
-                        grade:req.body.grade,
-                        class: req.params.classId,
-                    })
-                    .then(assignment => {
-                        res.status(201).json(assignment.seralize())
-                    })
-                    .catch(err => {
-                        console.error(err);
-                        res.status(500).json({ error: 'Something went wrong' })
-                    })
-            }
-            else {
-                const message = 'class not found';
-                console.error(message);
-                return res.status(400).send(message)
-            }
+                .findOne({class:req.params.classId})
+                .then(assignments => { 
+                    res.redirect(`/assignment/${assignments.class._id}`)
+                })
+
+            })
+            .catch(err => {
+                console.error(err);
+                res.status(500).json({ error: 'Something went wrong' })
+            })
+            
         })
-})
+
 
     app.put('/assignment', function (req, res) {
 
     })
 
-    app.delete('/assignment', function (req, res) {
-
+    app.delete('/api/assignment', function (req, res) {
+        Assignment
+            .findByIdAndRemove(req.body.assignmentId)
+            .then(() => res.status(204).end())
+            .catch(errorHandler)
     })
 
 }
