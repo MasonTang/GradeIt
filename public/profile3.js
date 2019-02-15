@@ -18,14 +18,14 @@ function deleteSemester(){
         const semesterId = {
             semesterId: dataId
         };
-        const closestli = $(this).closest('li');
+        const closestul = $(this).closest('ul');
 
         $.ajax({
             type:'Delete',
             url: '/api/semester',
             data: semesterId,
             success: function(){
-                closestli.remove();
+                closestul.remove();
             },
             error: function () {
                 alert('error saving error');
@@ -42,14 +42,14 @@ function deleteClass() {
         const classId = {
             classId: dataId
         };
-        const closestli = $(this).closest('li');
+        const closestul = $(this).closest('ul');
 
         $.ajax({
             type: 'Delete',
             url: '/api/class',
             data: classId,
             success: function () {
-                closestli.remove();
+                closestul.remove();
             },
             error: function () {
                 alert('error saving error');
@@ -66,14 +66,14 @@ function deleteAssignment() {
         const assignmentId = {
             assignmentId: dataId
         };
-        const closestli = $(this).closest('li');
+        const closestul = $(this).closest('ul');
 
         $.ajax({
             type: 'Delete',
             url: '/api/assignment',
             data: assignmentId,
             success: function () {
-                closestli.remove();
+                closestul.remove();
             },
             error: function () {
                 alert('error saving error');

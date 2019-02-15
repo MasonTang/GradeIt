@@ -1,0 +1,16 @@
+.card {
+  height: 20vh;
+  width: 100%;
+  background-color: #45B649;
+  margin: 10px 0px;
+  font-size: 2rem; }
+  .card_padding-li {
+    padding-top: 7px; }
+  .card_button {
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    background-color: #DCE35B;
+    border: none; }
+
+.margin-left-sm {
+  margin-left: 10px; }

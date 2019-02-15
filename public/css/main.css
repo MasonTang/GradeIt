@@ -21,6 +21,21 @@ html {
 li {
   list-style-type: none; }
 
+a {
+  color: black;
+  text-decoration: none; }
+
+.center {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto; }
+
 header {
   background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(128, 128, 128, 0.8)), to(rgba(128, 128, 128, 0.4))), url(../University.jpg);
   background-image: -webkit-linear-gradient(rgba(128, 128, 128, 0.8), rgba(128, 128, 128, 0.4)), url(../University.jpg);
@@ -130,6 +145,31 @@ label {
   margin-top: 0.5rem;
   font-size: 1.6rem; }
 
+.card {
+  height: 12vh;
+  width: 100%;
+  background-color: #7dda26;
+  margin: 10px 0px;
+  font-size: 1.6rem;
+  padding: 6px; }
+  .card_padding-li {
+    padding-top: 7px; }
+  .card_button {
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    background-color: #DCE35B;
+    border: none;
+    -webkit-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2); }
+    .card_button:hover {
+      cursor: pointer;
+      -webkit-transform: translateY(-2px);
+      -ms-transform: translateY(-2px);
+      transform: translateY(-2px); }
+
+.margin-left-sm {
+  margin-left: 10px; }
+
 .auth-form {
   background-color: #FFFFFF;
   width: 30rem;
@@ -194,7 +234,11 @@ label {
   padding-right: 3.2rem;
   padding-bottom: 1.1rem;
   padding-top: 1.1rem;
-  margin-left: 25%;
+  margin-left: auto;
+  margin-right: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   font-family: 'Ubuntu', sans-serif;
   text-align: center;
   font-size: 1.6rem;
@@ -217,7 +261,7 @@ label {
   color: #726d6d;
   text-decoration: none; }
 
-nav {
+.main-nav {
   background: #DCE35B;
   /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #45B649, #DCE35B);
@@ -229,8 +273,13 @@ nav {
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   height: 11vh;
   width: 100%;
-  position: relative; }
-  nav ul {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+  justify-content: space-around; }
+  .main-nav ul {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -245,6 +294,41 @@ nav {
 
 .nav-title {
   display: none; }
+
+.logout {
+  font-size: 2rem;
+  cursor: pointer; }
+
+.back-button {
+  font-size: 2rem !important; }
+
+.hidden {
+  display: hidden; }
+
+.profile-nav {
+  background: #DCE35B;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #45B649, #DCE35B);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-gradient(linear, left top, right top, from(#45B649), to(#DCE35B));
+  background: -webkit-linear-gradient(left, #45B649, #DCE35B);
+  background: -o-linear-gradient(left, #45B649, #DCE35B);
+  background: linear-gradient(to right, #45B649, #DCE35B);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  height: 7vh;
+  width: 100%;
+  position: relative; }
+  .profile-nav ul {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding-top: 2.1vh; }
+
+.right {
+  margin-left: auto; }
 
 .no-border {
   border: none;
@@ -291,6 +375,13 @@ hr {
 .new-semester {
   margin-left: 4%;
   margin-bottom: 2rem; }
+
+.assignment-flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+  justify-content: space-around; }
 
 .nav-title {
   font-size: 2rem;

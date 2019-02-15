@@ -157,7 +157,6 @@ module.exports = function (app, passport) {
             .findOne({_id:req.params.semesterId})
             .then(semesters => {
                 if(semesters){
-                    let Id = semesters._id
                     Class
                         .find({ semester: req.params.semesterId })
                         .then(results => {
@@ -165,7 +164,6 @@ module.exports = function (app, passport) {
                         })
                 }
             })
-            
     })
 
     app.post('/class/:semesterId', function (req, res) {
@@ -240,18 +238,48 @@ app.get('/assignment/all' , function(req,res) {
 })
 
 app.get('/assignment/:classId', function (req, res) {
+    let classes;
+
     Class
         .findOne({_id:req.params.classId})
-        .then(classes => {
-            if(classes){
+        .then(classesArray => {
+            if(classesArray){
+                classes = classesArray
+
                 Assignment
                     .find({class:req.params.classId})
                     .then(assignments => {
-                        res.render('assignment', {classe:classes, assignment:assignments})
+                    
+///////////////////////////////
+//// Calculate Average Grade
+//////////////////////////////////////////////////////
+                        const totalGrades = [];
+                        const arrayWeight = [];
+                        const arrayGrade = [];
+                        const sum = (a, b) => parseInt(a) + parseInt(b);
+                        const weights = assignments.forEach(function(assignment){
+                            arrayWeight.push(assignment.weight)
+                        })
+                        const grades = assignments.forEach(function (assignment) {
+                            arrayGrade.push(assignment.grade)
+                        })
+                        const totalWeight = arrayWeight.reduce(sum);
+                        for(let i = 0; i < arrayGrade.length; i++){
+                            totalGrades.push(arrayWeight[i] * arrayGrade[i])
+                        }
+                        const sumMultGradeWeight = totalGrades.reduce(sum);
+                        const finalGrade = (sumMultGradeWeight / totalWeight).toFixed(2);
+
+
+                        res.render('assignment', {
+                            classe:classes, 
+                            assignment:assignments,
+                            finalGrade: finalGrade
+                        })
                     })
             }
         })
-        .catch(errorHandler);
+        .catch('Something went wrong');
 })
 
 app.post('/assignment/:classId', function (req, res) {

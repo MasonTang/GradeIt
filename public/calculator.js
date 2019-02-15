@@ -57,11 +57,11 @@ function calculateGrade(){
         $('.display-grade').empty();
         $('.display-needed-grade').empty();
 
-        const displayFinalGrade = `<p>Your overall grade is a ${finalGrade}.</p>`;
+        const displayFinalGrade = `<p>Your overall grade is a ${finalGrade}%.</p>`;
         
         $(displayFinalGrade).appendTo($('.display-grade'));
 
-        const displayNeededGrade = `<p>You need to make a ${neededGrade} on your final or for the rest of your class to make a ${desiredGrade}.</p>`
+        const displayNeededGrade = `<p>You need to make a ${neededGrade}% on your final or for the rest of your class to make a ${desiredGrade}.</p>`
         
         if(desiredGrade > 0){
             $(displayNeededGrade).appendTo($('.display-needed-grade'));

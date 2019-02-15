@@ -8,23 +8,26 @@
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="../css/main.css" />
 </head>
 
 <body>
 
-<nav role="navigation">
+<nav class="profile-nav" role="navigation">
     <ul>
-        <li><a href=""> ->Class </a></li>
-        <li><a href="/"><img class="logo" src="../logo.png" alt=""></li></a>
-        <li class="nav-title">Calculate Store Grades</li>
+        <li><a href="/class/<%= classe._id %>"><i class="fas fa-angle-left back-button">Class</i></a></li>
+        <li class="right logout fas">
+        <a href="/"><i class="fas fa-sign-out-alt back-button">Logout</i></a></li>
     </ul>
 </nav>
 
 <main role="main">
 
     <section class="welcome" role="region">
-        <h1> Class: <%= classe.class %></h1>
+        <h1><%= classe.class %></h1>
+        <h1><%= classe._id %></h1>
     </section>
 
 
@@ -44,24 +47,28 @@
             </li>
         </ul>
     </div>
-    </div>
+    
 
-    <ul>
+    <ul class="assignment-flex">
         <li>Assignment</li>
         <li>Weights</li>
         <li>Grades</li>
+        <li>Delete</li>
     </ul>
 
-    <ul id="get-assignment">
+    <div id="get-assignment">
         <% assignment.forEach(function(assignments){%>
-        <li class="addClassLayout"><%=assignments.assignment%> <%=assignments.weight%> <%=assignments.grade%> <button data-id='<%=assignments._id%>' class="remove">X</button>
-        </li>
-        
+        <ul class="assignment-flex" >
+            <li><%=assignments.assignment%> </li>  
+            <li><%=assignments.weight%></li> 
+            <li><%=assignments.grade%></li> 
+            <li><button data-id='<%=assignments._id%>' class="remove">X</button></li> 
+        </ul>
         <%})%>
-    </ul>
+    </div>
 
-    <p>Overall Grade: </p>
-
+    <p>Overall Grade</p>
+    <h2><%= finalGrade %> </h2>
 </main>
     
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="

@@ -24,3 +24,14 @@ li{
   list-style-type:none;
 }
 
+a{
+	color:black;
+	text-decoration:none;
+}
+
+.center{
+	display:flex;
+	flex-direction: column;
+	margin-left:auto;
+	margin-right:auto;
+}

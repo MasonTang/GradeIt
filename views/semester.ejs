@@ -8,25 +8,27 @@
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="./css/main.css" />
 </head>
 
 <body>
 
-    <nav role="navigation">
+    <nav class="main-nav" role="navigation">
         <ul>
             <li><a href="/"><img class="logo" src="logo.png" alt=""></li></a>
             <li class="nav-title">Calculate Store Grades</li>
         </ul>
     </nav>
     
-    <main role="main">
+    <main class="center" role="main">
     
         <div class="welcome" role="region">
             <h1>Welcome
                 <%= user.local.username %>
             </h1>
-            <h3>Store and Calculate your grades from semester to semester</h3>
+            <h3>Store and Calculate Your Grades From Semester To Semester</h3>
         </div>
     
         <section role="region">
@@ -37,17 +39,20 @@
         </form>
         </section>
     
-        <ul id="get-semester">
+    <div id="get-semester">
             <% semesters.forEach(function(semester){%>
-                <li class="addSemesterLayout">
-                    <a href="/class/<%=semester._id%>"><%=semester.semester%></a>
-                    <button data-id='<%=semester._id%>' class="remove">X</button>
+            <ul class="card">
+                <li><%=semester.semester%></li>
+                <li class="card_padding-li">
+                    <a href="/class/<%=semester._id%>"><button class="card_button">Add Classes</button></a>
+                    <button data-id='<%=semester._id%>' class=" remove card_button margin-left-sm">Delete Semester</button>
                 </li>
+            </ul>
             <%})%>
-        </ul>
-    
+    </div>
+
     </main>
-  
+
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
         crossorigin="anonymous"></script>
     <script src="/profile3.js"></script>

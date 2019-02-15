@@ -8,18 +8,21 @@
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="../css/main.css" />
 </head>
 
 <body>
 
-    <nav role="navigation">
+    <nav class="profile-nav" role="navigation">
         <ul>
-            <li><a href="/semester"> -< Semester </a> </li> <li><a href="/semester/"><img class="logo" src="../logo.png" alt=""></li></a>
-            <li class="nav-title">Calculate Store Grades</li>
+            <li><a href="/semester"><i class="fas fa-angle-left back-button">Semester</i></a></li> 
+            <li class="right logout fas">
+                <a href="/"><i class="fas fa-sign-out-alt back-button">Logout</i></a></li>
         </ul>
     </nav>
-    
+
     <main role="main">
     
         <div class="welcome" role="region">
@@ -34,14 +37,17 @@
             </form>
         </section>
 
-    <ul id="get-class">
+    <div id="get-class">
         <% classes.forEach(function(classe){%>
-        <li class="addClassLayout">
-            <a href="/assignment/<%=classe._id%>"><%=classe.class%></a>
-            <button data-id='<%=classe._id%>' class="remove">X</button>
-        </li>
+        <ul class="card">
+            <li><%=classe.class%></li>
+            <li class="card_padding-li">
+                <a href="/assignment/<%=classe._id%>"><button class="card_button">Add Assignment</button></a>
+                <button data-id='<%=classe._id%>' class=" remove card_button margin-left-sm">Delete Class</button>
+            </li>
+        </ul>
         <%})%>
-    </ul>
+    </div>
 
     </main>
     
