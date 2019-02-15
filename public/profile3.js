@@ -36,7 +36,7 @@ function deleteSemester(){
 
 function deleteClass() {
 
-    $('#get-class').on('click', 'button', function (e) {
+    $('#get-class').on('click', '.remove', function (e) {
 
         let dataId = $(this).attr('data-id');
         const classId = {
@@ -66,7 +66,7 @@ function deleteAssignment() {
         const assignmentId = {
             assignmentId: dataId
         };
-        const closestul = $(this).closest('ul');
+        const closestul = $(this).closest('.assignment-grid');
 
         $.ajax({
             type: 'Delete',

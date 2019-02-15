@@ -26,7 +26,7 @@
     <main role="main">
     
         <div class="welcome" role="region">
-            <h1>Semester <%= semester.semester %></h1>
+            <h1><%= semester.semester %></h1>
         </div>
     
         <section role="region">
@@ -43,7 +43,7 @@
             <li><%=classe.class%></li>
             <li class="card_padding-li">
                 <a href="/assignment/<%=classe._id%>"><button class="card_button">Add Assignment</button></a>
-                <button data-id='<%=classe._id%>' class=" remove card_button margin-left-sm">Delete Class</button>
+                <button data-id='<%=classe._id%>' class="remove card_button margin-left-sm">Delete Class</button>
             </li>
         </ul>
         <%})%>

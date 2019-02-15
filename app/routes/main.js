@@ -238,14 +238,11 @@ app.get('/assignment/all' , function(req,res) {
 })
 
 app.get('/assignment/:classId', function (req, res) {
-    let classes;
 
     Class
         .findOne({_id:req.params.classId})
-        .then(classesArray => {
-            if(classesArray){
-                classes = classesArray
-
+        .then(classes => {
+            if(classes){
                 Assignment
                     .find({class:req.params.classId})
                     .then(assignments => {
@@ -253,9 +250,9 @@ app.get('/assignment/:classId', function (req, res) {
 ///////////////////////////////
 //// Calculate Average Grade
 //////////////////////////////////////////////////////
-                        const totalGrades = [];
-                        const arrayWeight = [];
-                        const arrayGrade = [];
+                        const totalGrades = [0];
+                        const arrayWeight = [0];
+                        const arrayGrade = [0];
                         const sum = (a, b) => parseInt(a) + parseInt(b);
                         const weights = assignments.forEach(function(assignment){
                             arrayWeight.push(assignment.weight)

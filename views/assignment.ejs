@@ -17,7 +17,7 @@
 
 <nav class="profile-nav" role="navigation">
     <ul>
-        <li><a href="/class/<%= classe._id %>"><i class="fas fa-angle-left back-button">Class</i></a></li>
+        <li><a href="/class/<%= classe.semester._id %>"><i class="fas fa-angle-left back-button">Class</i></a></li>
         <li class="right logout fas">
         <a href="/"><i class="fas fa-sign-out-alt back-button">Logout</i></a></li>
     </ul>
@@ -27,7 +27,6 @@
 
     <section class="welcome" role="region">
         <h1><%= classe.class %></h1>
-        <h1><%= classe._id %></h1>
     </section>
 
 
@@ -39,36 +38,54 @@
         <ul class="assignmentslist">
             <li class="assignment-item">
                 <form action="/assignment/<%=classe.id%>" method="POST" class="assignment-form">
-                    <input type="text" name="assignment" placeholder="assignment">
-                    <input name="weight" type="number" placeholder="weight %">
-                    <input name="grade" type="number" placeholder="grades %">
+                    <input type="text" name="assignment" placeholder="assignment" required>
+                    <input name="weight" type="number" placeholder="weight %" required>
+                    <input name="grade" type="number" placeholder="grades %" required>
                     <input type="submit" value="Save" />
                 </form>
             </li>
         </ul>
     </div>
-    
 
-    <ul class="assignment-flex">
-        <li>Assignment</li>
-        <li>Weights</li>
-        <li>Grades</li>
-        <li>Delete</li>
-    </ul>
+    <div class="row">
+        <div>
+            <div class="col-3">
+                <div class="box orange">Assignment</div>
+            </div>
+            <div class="col-3">
+                <div class="box blue">Weight</div>
+            </div>
+            <div class="col-3">
+                <div class="box green">Grade</div>
+            </div>
+            <div class="col-3">
+                <div class="box black">Delete</div>
+            </div>
+        </div>
+    </div>
 
-    <div id="get-assignment">
+    <div id="get-assignment" class="row">
         <% assignment.forEach(function(assignments){%>
-        <ul class="assignment-flex" >
-            <li><%=assignments.assignment%> </li>  
-            <li><%=assignments.weight%></li> 
-            <li><%=assignments.grade%></li> 
-            <li><button data-id='<%=assignments._id%>' class="remove">X</button></li> 
-        </ul>
+        <div class="assignment-grid">
+            <div class="col-3">
+                <div class="box orange"><%=assignments.assignment%></div>
+            </div>
+            <div class="col-3">
+                <div class="box blue"><%=assignments.weight%></div>
+            </div>
+            <div class="col-3">
+                <div class="box green"><%=assignments.grade%></div>
+            </div>
+            <div class="col-3">
+                <div class="box black"><button data-id='<%=assignments._id%>' class="remove">X</button></div>
+            </div>
+        </div>
         <%})%>
     </div>
 
     <p>Overall Grade</p>
     <h2><%= finalGrade %> </h2>
+
 </main>
     
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
