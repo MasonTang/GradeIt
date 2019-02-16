@@ -7,6 +7,7 @@ function watchForm(){
     deleteSemester();
     deleteClass();
     deleteAssignment();
+    displayGrades();
 }
 watchForm();
 
@@ -79,5 +80,12 @@ function deleteAssignment() {
                 alert('error saving error');
             }
         })
+    })
+}
+
+function displayGrades(){
+    $('#display-grade').click(function(e){
+        console.log('hi')
+        $('.display-overall-grade').show();
     })
 }

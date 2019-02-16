@@ -267,7 +267,6 @@ app.get('/assignment/:classId', function (req, res) {
                         const sumMultGradeWeight = totalGrades.reduce(sum);
                         const finalGrade = (sumMultGradeWeight / totalWeight).toFixed(2);
 
-
                         res.render('assignment', {
                             classe:classes, 
                             assignment:assignments,

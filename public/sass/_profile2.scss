@@ -39,7 +39,7 @@ hr{
     
     input{
         width:90%;
-        padding:3px;
+        padding:7px;
         margin-bottom: 5px;
     }
 }
@@ -52,4 +52,18 @@ hr{
 .assignment-flex{
   display:flex;
   justify-content:space-around;
+}
+
+.input-box{
+  border-radius: 1rem;
+  background-color:white;
+  border:none;
+  padding: 4px 8px;
+}
+
+.assignment-box{
+  border-radius: 1rem;
+  background-color:white;
+  border:none;
+  padding: 6px 8px;
 }

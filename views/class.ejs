@@ -26,14 +26,14 @@
     <main role="main">
     
         <div class="welcome" role="region">
-            <h1><%= semester.semester %></h1>
+            <h1 class="center-flex"><%= semester.semester %></h1>
         </div>
     
         <section role="region">
-            <h1>Add Classes</h1>
+            <h2 class="margin-left-sm">Add Classes</h2>
             <form action="/class/<%= semester._id %>" method="POST">
-                <input type="text" name="class" placeholder="Chemistry">
-                <input type="submit" value="Add">
+                <input class="input-box margin-left-sm" type="text" name="class" placeholder="Chemistry">
+                <input class="card_button" type="submit" value="Add">
             </form>
         </section>
 

@@ -408,7 +408,7 @@ hr {
 
 .assignment-form input {
   width: 90%;
-  padding: 3px;
+  padding: 7px;
   margin-bottom: 5px; }
 
 .new-semester {
@@ -422,6 +422,18 @@ hr {
   -ms-flex-pack: distribute;
   justify-content: space-around; }
 
+.input-box {
+  border-radius: 1rem;
+  background-color: white;
+  border: none;
+  padding: 4px 8px; }
+
+.assignment-box {
+  border-radius: 1rem;
+  background-color: white;
+  border: none;
+  padding: 6px 8px; }
+
 .nav-title {
   font-size: 2rem;
   -webkit-box-align: center;
@@ -434,5 +446,35 @@ hr {
 
 h1 {
   font-family: Arial, Helvetica, sans-serif;
+  font-size: 2rem;
+  font-weight: 900; }
+
+h2 {
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 1.6rem;
   font-weight: 900; }
+
+h3 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  font-weight: 900; }
+
+.medium-font {
+  font-size: 1.1rem; }
+
+.margin-top-sm {
+  margin-top: 1rem; }
+
+.margin-left-sm {
+  margin-left: 1rem; }
+
+.center-flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center; }
+
+.col-3 {
+  padding-top: 3px; }

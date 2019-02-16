@@ -22,24 +22,24 @@
         </ul>
     </nav>
     
-    <main class="center" role="main">
+    <main role="main">
     
-        <div class="welcome" role="region">
-            <h1>Welcome
+        <div role="region">
+            <h1 class="center-flex" >Welcome
                 <%= user.local.username %>
             </h1>
-            <h3>Store and Calculate Your Grades From Semester To Semester</h3>
+            <h3 class="margin-left-sm">Store and Calculate Your Grades From Semester To Semester</h3>
         </div>
     
         <section role="region">
         <form method="POST" action="/api/semester">
-            <h1>Add Semester</h1>
-            <input  id="input-semester" name="semester" type="text" placeholder="Fall, 2018">
-            <input type="submit" value="Submit">
+            <h2 class="margin-top-sm margin-left-sm">Add Semester</h2>
+            <input class="input-box margin-left-sm" id="input-semester" name="semester" type="text" placeholder="Fall, 2018">
+            <input class="card_button" type="submit" value="Submit">
         </form>
         </section>
     
-    <div id="get-semester">
+    <div class="margin-top-sm" id="get-semester">
             <% semesters.forEach(function(semester){%>
             <ul class="card">
                 <li><%=semester.semester%></li>

@@ -26,65 +26,66 @@
 <main role="main">
 
     <section class="welcome" role="region">
-        <h1><%= classe.class %></h1>
+        <h1 class="center-flex"><%= classe.class %></h1>
+        <h2 class="class-name"></h2>
+        
+        <h2 class="margin-left-sm">Assignments:</h2>
+        <div class="assignments">
+            <ul class="assignmentslist">
+                <li class="assignment-item">
+                    <form action="/assignment/<%=classe.id%>" method="POST" class="assignment-form">
+                        <input class="assignment-box" type="text" name="assignment" placeholder="assignment" required>
+                        <input class="assignment-box" name="weight" type="number" placeholder="weight %" required>
+                        <input class="assignment-box" name="grade" type="number" placeholder="grades %" required>
+                        <input class="card_button margin-top-sm" id="display-grade" type="submit" value="Save" />
+                    </form>
+                </li>
+            </ul>
+        </div>
+
     </section>
 
-
-
-    <h2 class="class-name"></h2>
-
-    <h3>Assignments:</h3>
-    <div class="assignments">
-        <ul class="assignmentslist">
-            <li class="assignment-item">
-                <form action="/assignment/<%=classe.id%>" method="POST" class="assignment-form">
-                    <input type="text" name="assignment" placeholder="assignment" required>
-                    <input name="weight" type="number" placeholder="weight %" required>
-                    <input name="grade" type="number" placeholder="grades %" required>
-                    <input type="submit" value="Save" />
-                </form>
-            </li>
-        </ul>
-    </div>
-
-    <div class="row">
-        <div>
-            <div class="col-3">
-                <div class="box orange">Assignment</div>
-            </div>
-            <div class="col-3">
-                <div class="box blue">Weight</div>
-            </div>
-            <div class="col-3">
-                <div class="box green">Grade</div>
-            </div>
-            <div class="col-3">
-                <div class="box black">Delete</div>
+    <section class="display-overall-grades">
+        <div class="row">
+            <div>
+                <div class="col-3">
+                    <h4>Assignment</h4>
+                </div>
+                <div class="col-3">
+                    <h4>Weight</h4>
+                </div>
+                <div class="col-3">
+                    <h4>Grade</h4>
+                </div>
+                <div class="col-3">
+                    <h4>Delete</h4>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div id="get-assignment" class="row">
-        <% assignment.forEach(function(assignments){%>
-        <div class="assignment-grid">
-            <div class="col-3">
-                <div class="box orange"><%=assignments.assignment%></div>
+        <div id="get-assignment" class="row">
+            <% assignment.forEach(function(assignments){%>
+            <div class="assignment-grid">
+                <div class="col-3">
+                    <div class="medium-font"><%=assignments.assignment%></div>
+                </div>
+                <div class="col-3">
+                    <div class="medium-font"><%=assignments.weight%></div>
+                </div>
+                <div class="col-3">
+                    <div class="medium-font"><%=assignments.grade%></div>
+                </div>
+                <div class="col-3">
+                    <div><button data-id='<%=assignments._id%>' class="remove">X</button></div>
+                </div>
             </div>
-            <div class="col-3">
-                <div class="box blue"><%=assignments.weight%></div>
-            </div>
-            <div class="col-3">
-                <div class="box green"><%=assignments.grade%></div>
-            </div>
-            <div class="col-3">
-                <div class="box black"><button data-id='<%=assignments._id%>' class="remove">X</button></div>
-            </div>
+            <%})%>
         </div>
-        <%})%>
-    </div>
 
-    <p>Overall Grade</p>
-    <h2><%= finalGrade %> </h2>
+        <h2 class="margin-top-sm center-flex">Overall Grade</h2>
+        <h2 class="margin-left-sm center-flex"><%= finalGrade %> </h3>
+
+    </section>
 
 </main>
     
