@@ -2,11 +2,19 @@
     background: #DCE35B;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #45B649, #DCE35B);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #45B649, #DCE35B); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    height:11vh;
+    height:5.5rem;
     width:100%;
     position:relative;
     display:flex;
     justify-content:space-around;
+
+    // @include respond(tablet){
+    //     height:7vh;
+    // }
+
+    // @include respond(tablet-horizontal){
+    //     height: 13vh;
+    // }
 
     ul{
     display:flex;
@@ -16,7 +24,7 @@
 }
 
 .logo{
-    width: 8rem;
+    width: 7rem;
 }
 
 .nav-title{
