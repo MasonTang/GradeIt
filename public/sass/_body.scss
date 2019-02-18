@@ -4,6 +4,10 @@ header{
   background-size:cover;
   background-position:center;
   position:relative;
+
+  @include respond(tablet){
+    height: 80vh;  
+  }
 }
 
 .background-text {
@@ -37,8 +41,8 @@ header{
 }
 
 .calculator {
-  width: 80%;
-  margin-left:10%;
+  width: 90%;
+  margin-left:5%;
   margin-top:2%;
 }
 

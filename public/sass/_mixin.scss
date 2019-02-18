@@ -3,7 +3,7 @@
 		@media only screen and (min-width: 20em) { @content };//320px
 	}
 
-	@if $breakpoint == mobile-horizontal {
+	@if $breakpoint == mobileHorizontal {
 		@media only screen and (min-width: 30em) { @content };//480px
 	}
 
@@ -11,7 +11,7 @@
 		@media only screen and (min-width: 47.9375em) { @content };//767px
 	}
 
-	@if $breakpoint == tablet-horizontal {
+	@if $breakpoint == tabletHorizontal {
 		@media only screen and (min-width: 64em) { @content };//1024px
 	}
 	
