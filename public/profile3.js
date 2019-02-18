@@ -64,6 +64,7 @@ function deleteAssignment() {
     $('#get-assignment').on('click', 'button', function (e) {
 
         let dataId = $(this).attr('data-id');
+        let classId = $(this).attr('class-id');
         const assignmentId = {
             assignmentId: dataId
         };
@@ -75,6 +76,7 @@ function deleteAssignment() {
             data: assignmentId,
             success: function () {
                 closestul.remove();
+                location.href = `/assignment/${classId}`
             },
             error: function () {
                 alert('error saving error');
