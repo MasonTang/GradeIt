@@ -12,7 +12,7 @@ watchForm();
 
 function deleteSemester(){
     
-    $('#get-semester').on('click', 'button', function(e){
+    $('#get-semester').on('click', 'button.remove', function(e){
 
         let dataId = $(this).attr('data-id');
         const semesterId = {

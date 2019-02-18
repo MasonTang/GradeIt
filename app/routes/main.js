@@ -85,13 +85,6 @@ module.exports = function (app, passport) {
             .catch(errorHandler);
     })
 
-    app.get('/api/semester', function (req, res) {
-        Semester
-            .find({user: req.user._id})
-            .then(result => res.send(result))
-            .catch(errorHandler);
-    })
-
     app.post('/api/semester', function (req, res) {
         const requiredFields = ['semester']
         for (let i = 0; i < requiredFields.length; i++) {
@@ -157,7 +150,7 @@ module.exports = function (app, passport) {
             .catch(errorHandler);
     })
 
-    app.get('/class/:semesterId', function (req, res) {
+    app.get('/class/:semesterId', isLoggedIn, function (req, res) {
         Semester
             .findOne({_id:req.params.semesterId})
             .then(semesters => {
@@ -242,7 +235,7 @@ app.get('/assignment/all' , function(req,res) {
     .catch(errorHandler)
 })
 
-app.get('/assignment/:classId', function (req, res) {
+app.get('/assignment/:classId', isLoggedIn, function (req, res) {
 
     Class
         .findOne({_id:req.params.classId})
@@ -270,11 +263,12 @@ app.get('/assignment/:classId', function (req, res) {
                             totalGrades.push(arrayWeight[i] * arrayGrade[i])
                         }
                         const sumMultGradeWeight = totalGrades.reduce(sum);
-                        const finalGrade = (sumMultGradeWeight / totalWeight).toFixed(2);
+                        let finalGrade = (sumMultGradeWeight / totalWeight).toFixed(2);
 
-                        if(typeof finalGrade === NaN){
-                            finalGrade === '5';
+                        if(finalGrade === "NaN"){
+                            finalGrade = '0';
                         }
+                        
 
                         res.render('assignment', {
                             classe:classes, 
@@ -310,19 +304,12 @@ app.post('/assignment/:classId', function (req, res) {
                 .then(assignments => { 
                     res.redirect(`/assignment/${assignments.class._id}`)
                 })
-
             })
             .catch(err => {
                 console.error(err);
                 res.status(500).json({ error: 'Something went wrong' })
             })
-            
         })
-
-
-    app.put('/assignment', function (req, res) {
-
-    })
 
     app.delete('/api/assignment', function (req, res) {
         Assignment

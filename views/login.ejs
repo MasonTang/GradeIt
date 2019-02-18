@@ -21,6 +21,10 @@
 
     <main class="auth-form" role="main">
         <p class="sign">Log in</p>
+
+        <% if(message){ %>
+            <p class="loginerror center-flex"><%=message%></p>
+        <% } %>
         
         <form class="sign-in" method="post" action="/login">
             <input name="username" class="un" type="text" placeholder="Username">

@@ -444,7 +444,12 @@ hr {
   padding: 6px 8px; }
 
 .remove {
-  padding: 10px; }
+  padding: 6.1px; }
+
+.loginerror {
+  height: 5%;
+  width: 100%;
+  background-color: #e8ff16; }
 
 .nav-title {
   font-size: 2rem;
