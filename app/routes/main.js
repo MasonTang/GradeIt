@@ -7,7 +7,9 @@ module.exports = function (app, passport) {
     const {Semester} = require('../models/semester');
     const {Assignment} = require('../models/assignment');
     const bodyParser = require('body-parser');
-    const uuid = require('uuidv4')
+    const cookieParser = require('cookie-parser');
+    const session = require('express-session');
+    const flash = require('req-flash');
 
     app.use(bodyParser.json()); //get information from html forms
     app.use(bodyParser.urlencoded({
@@ -16,6 +18,9 @@ module.exports = function (app, passport) {
     app.use(express.json());
 
     app.set('view engine', 'ejs')
+    app.use(cookieParser());
+    app.use(session({ secret: '123' }));
+    app.use(flash());
 ////////////////////////////////////////////////
 //TESTING ROUTES
 ///////////////////////////////////////////////

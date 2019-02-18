@@ -184,8 +184,8 @@ label {
 
 .row {
   max-width: 1000px;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 5px;
+  padding-right: 0px;
   margin: 0 auto; }
 
 /* Clearfix */
@@ -489,4 +489,4 @@ h3 {
   padding-top: 3px; }
 
 .large-font {
-  font-size: 1.8rem; }
+  font-size: 1.5rem; }

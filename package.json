@@ -32,6 +32,7 @@
     "passport-google-oauth": "^1.0.0",
     "passport-local": "^1.0.0",
     "passport-twitter": "^1.0.4",
+    "req-flash": "0.0.3",
     "uuid": "^3.3.2",
     "uuidv4": "^2.0.0"
   }
