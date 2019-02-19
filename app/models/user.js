@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt-nodejs');
-const Grade = require('./grade')
 
 mongoose.Promise = global.Promise;
 

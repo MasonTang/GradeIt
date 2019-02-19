@@ -2,7 +2,6 @@ module.exports = function (app, passport) {
     const express = require("express");
     const mongoose = require('mongoose');
     const {User} = require('../models/user');
-    const {Grade} = require('../models/grade');
     const {Class} = require('../models/class');
     const {Semester} = require('../models/semester');
     const {Assignment} = require('../models/assignment');
