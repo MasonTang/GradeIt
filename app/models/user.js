@@ -8,21 +8,10 @@ const userSchema = mongoose.Schema({
     local :{
         username: String,
         password: String
-    },
-    grade: { type: mongoose.Schema.Types.ObjectId, ref: 'Grade' }
+    }
 },{
     usePushEach:true
 });
-
-userSchema.pre('find', function (next) {
-    this.populate('grade')
-    next();
-})
-
-userSchema.pre('findOne', function (next) {
-    this.populate('grade')
-    next();
-})
 
 //methods ==================
 //generating a  hash
