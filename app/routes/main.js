@@ -10,7 +10,7 @@ module.exports = function (app, passport) {
     const cookieParser = require('cookie-parser');
     const session = require('express-session');
     const flash = require('req-flash');
-
+    
     app.use(bodyParser.json()); //get information from html forms
     app.use(bodyParser.urlencoded({
         extended: true
