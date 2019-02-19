@@ -78,13 +78,6 @@ module.exports = function (app, passport) {
             .catch(errorHandler);
     });
 
-    app.get('/semester/all', function(req, res) {
-        Semester
-            .find()
-            .then(result => res.send(result))
-            .catch(errorHandler);
-    })
-
     app.post('/api/semester', function (req, res) {
         const requiredFields = ['semester']
         for (let i = 0; i < requiredFields.length; i++) {
@@ -142,13 +135,6 @@ module.exports = function (app, passport) {
 /////////////////////////
 //Class
 ////////////////////////////////////////
-
-    app.get('/class/all', function (req, res) {
-        Class
-            .find()
-            .then(result => res.send(result))
-            .catch(errorHandler);
-    })
 
     app.get('/class/:semesterId', isLoggedIn, function (req, res) {
         Semester
@@ -225,15 +211,6 @@ app.delete('/api/class', function (req, res) {
 /////////////////////////
 //Assignment
 ////////////////////////////////////////
-
-app.get('/assignment/all' , function(req,res) {
-    Assignment
-    .find()
-    .then(result => {
-        res.send(result);
-    })
-    .catch(errorHandler)
-})
 
 app.get('/assignment/:classId', isLoggedIn, function (req, res) {
 
@@ -348,115 +325,3 @@ function isAdmin(req, res, next) {
 function errorHandler(err){
     console.error(err);
 }
-
-///////////////////////////////////////////////////////////////
-//TESTING ROUTES IN DB FOR GRADE
-/////////////////////////////////////
-// app.get('/grades', (req, res) => {
-//     Grade
-//         .find()
-//         .then(result => res.send(result))
-//         .catch(errorHandler);
-// });
-
-// app.post('/grades', (req, res) => {
-    // const requiredFields = ['userId']
-    // for (let i = 0; i < requiredFields.length; i++) {
-    //     const field = requiredFields[i];
-    //     if (!(field in req.body)) {
-    //         const message = `Missing \`${field}\` in request body`;
-    //         console.error(message);
-    //         return res.status(400).send(message);
-    //     }
-    // }
-//     let userId = req.user._id
-//     User
-//         .findById(userId)
-//         .then(user => {
-//             if (user) {
-//                 Grade
-//                     .create({
-//                         className: req.body.className,
-//                         assignment: req.body.assignment,
-//                         grades: req.body.grades,
-//                         weight: req.body.weight,
-//                         semester: req.body.semester,
-//                         user: userId,
-//                         desiredGrade: req.body.desiredGrade
-//                     })
-//                     .then(grade => {
-//                         res.status(201).json(grade.seralize())
-//                     })
-//                     .catch(err => {
-//                         console.error(err);
-//                         res.status(500).json({ error: 'Something went wrong' })
-//                     })
-//             }
-//             else {
-//                 const message = 'author not found';
-//                 console.error(message);
-//                 return res.status(400).send(message)
-//             }
-//         })
-// })
-
-// //app.post('/semester', (req,res))
-
-// app.delete('/grades/:gradeId', (req, res) => {
-//     Grade
-//         .findByIdAndRemove(req.params.gradeId)
-//         .then((grade) => res.status(204).end())
-//         .catch(err => res.status(500).json({ message: "Internal server error" }))
-// })
-// /////////////////////////
-// //TESTING FOR USERS
-// ////////////////////////////////////////
-// app.get('/users', (req, res) => {
-//     User
-//         .find()
-//         .then(result => res.send(result))
-//         .catch(errorHandler)
-// });
-
-
-// /////////////////////////
-// //TESTING FOR Individual USERS
-// ////////////////////////////////////////
-// app.get('/grades/:userId', (req, res) => {
-//     Grade
-//         .find({ user: req.params.userId })
-//         .then(result => res.send(result))
-//         .catch(errorHandler);
-// });
-
-// //edit individual grades
-// app.put('/grades/:gradeId', (req, res) => {
-//     //it first checks if there is a req.params.id and if there is a req.body.id
-//     //next it checks if the are equal.
-//     //! if all it is not true than return an error
-
-//     const updated = {};
-//     const updateableFields = ['className', 'assignment', 'grades', 'weight', 'semester'];
-//     updateableFields.forEach(field => {
-//         //so its saying {}.className for updated[field]
-//         //req.body.className
-//         //updated now becomes req.body
-//         if (field in req.body) {
-//             updated[field] = req.body[field];
-//         }
-//     })
-
-//     Grade
-//         .findByIdAndUpdate(req.params.gradeId, { $set: updated }, { new: true })
-//         .then(updatedGrade => res.status(200).json({
-//             id: updatedGrade.id,
-//             className: updatedGrade.className,
-//             assignment: updatedGrade.assignment,
-//             grades: updatedGrade.grades,
-//             weight: updatedGrade.weight,
-//             semester: updatedGrade.semester
-//         }))
-//         .catch(err => res.status(500).json({ message: "Internal server error" }))
-// });
-
-
