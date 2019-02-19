@@ -8,7 +8,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 
-const {DATABASE_URL, PORT, Test_DATABASE_URL} = require('./config/database.js');
+const {DATABASE_URL, PORT, TEST_DATABASE_URL} = require('./config/database.js');
 const {Grade} = require('./app/models/grade');
 const {User} = require('./app/models/user');
 const {Semester} = require('./app/models/semester');
@@ -43,9 +43,9 @@ require('./app/routes/auth.js')(app, passport);
 let server;
 
 // this function connects to our database, then starts the server
-function runServer(Test_DATABASE_URL, port = PORT) {
+function runServer(DATABASE_URL, port = PORT) {
     return new Promise((resolve, reject) => {
-        mongoose.connect(Test_DATABASE_URL, err => {
+        mongoose.connect(DATABASE_URL, err => {
             if (err) {
                 console.log(err)
                 return reject(err);
