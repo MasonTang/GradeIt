@@ -7,7 +7,7 @@ Calculate and Store Grades Semester to Semester
 ## Landing Page
 Users can log into their existing account, access a Demo account, or link to the registration page to sign up. Once logged in, users are taken to the Dashboard.
 
-![Landing Page](/public/images/ScreenShots/landing.jpeg)
+![Landing Page](/public/images/ScreenShots/landing.jpg)
 
 ## Registration Page
 Users can register for a new account by entering credentials and submitting. Passwords must be at least 10 characters. Passwords are then encrypted, and the user is issued an authentication code. Once registered, the user is logged in. Users can also opt to return to the landing page to log in with an existing account.
