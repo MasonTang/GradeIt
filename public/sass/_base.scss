@@ -19,12 +19,12 @@ html {
 	font-size: 62.5%;
 	font-family: 'Rubik', sans-serif;
 
-	@include respond(tablet){
-		font-size: 78.5%;
-	}
-
 	@include respond(mobile){
 		font-size: 73.5%;
+	}
+
+	@include respond(tablet){
+		font-size: 77.5%;
 	}
 
 	
