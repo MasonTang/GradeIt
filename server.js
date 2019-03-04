@@ -8,7 +8,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 
-const {DATABASE_URL, PORT, TEST_DATABASE_URL} = require('./config/database.js');
+const {DATABASE_URL, PORT} = require('./config/database.js');
 const {User} = require('./app/models/user');
 const {Semester} = require('./app/models/semester');
 
