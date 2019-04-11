@@ -37,6 +37,12 @@ module.exports = function (app, passport) {
         res.render('signup', { message: req.flash('signupMessage') })    
     });
 
+
+    app.get('/google3f6af55c51fcf92e.html', (req, res) => {
+        res.render('google3f6af55c51fcf92e.html')
+        
+    });
+
     //users
     app.put('/users/:userId', (req, res) => {
         //it first checks if there is a req.params.id and if there is a req.body.id
