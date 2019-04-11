@@ -39,7 +39,7 @@ module.exports = function (app, passport) {
 
 
     app.get('/google3f6af55c51fcf92e.html', (req, res) => {
-        res.render('google3f6af55c51fcf92e.html')
+        res.redirect('/google3f6af55c51fcf92e.html')
         
     });
 
