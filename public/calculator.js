@@ -47,7 +47,7 @@ function calculateGrade(){
         //////////////////////////////////////////////////
         const desiredGrade = $('.final').val();
         const leftOverWeight = 100 - totalWeight;
-        const neededGrade = (desiredGrade * 100 - sumMultGradeWeight) / (leftOverWeight).toFixed(2);
+        const neededGrade = ((desiredGrade * 100 - sumMultGradeWeight) / (leftOverWeight)).toFixed(2);
         console.log(finalGrade)
         console.log(neededGrade)
 
