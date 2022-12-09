@@ -2,7 +2,7 @@
 
 Calculate and Store Grades Semester to Semester
 
-[See the live app here](http://gradeit.herokuapp.com/)
+[See the live app here](https://excited-kilt-cod.cyclic.app/)
 
 ## Landing Page
 Users can calculate their grades, log into their existing account, or link to the registration page to sign up. Once logged in, users are taken to the add Semester page.
